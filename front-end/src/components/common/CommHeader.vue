@@ -26,7 +26,9 @@
         <div class="content-BellFilled">
           <el-icon :size="25" color="#8A919F"><BellFilled /></el-icon>
         </div>
-        <div class="content-login">登录 / 注册</div>
+        <div class="content-login">
+          <router-link to="/login">登录 / 注册</router-link>
+        </div>
       </div>
     </div>
   </header>

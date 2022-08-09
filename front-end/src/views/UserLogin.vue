@@ -122,9 +122,14 @@
 </template>
 
 <script setup lang="ts">
+// vue
 import { reactive, ref } from "vue";
-//字体图标
+// api
+import { login } from "@/utils/api/login";
+//element
 import { Avatar, Lock } from "@element-plus/icons-vue";
+import { ElMessage } from "element-plus";
+
 //账号登录和短信登录切换
 const current = ref(1);
 //账号登录和短信登录
@@ -156,7 +161,19 @@ const userBtn = (formEl: any) => {
   if (!formEl) return;
   formEl.validate((valid: unknown, fields: unknown) => {
     if (valid) {
-      console.log("用户名和密码验证成功");
+      // console.log("用户名和密码验证成功");
+      login({
+        username: ruleForm.username,
+        password: ruleForm.userpwd,
+      }).then((res: any) => {
+        console.log(res);
+        if (res.code == "200") {
+          ElMessage({
+            message: res.message,
+            type: "success",
+          });
+        }
+      });
     } else {
       console.log("error submit!", fields, valid);
     }

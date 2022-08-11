@@ -27,9 +27,10 @@ func Start() {
 	})
 
 	e.Use(mwCORS)
-	e.POST("/add", Controller.AddUser)
-	e.GET("/list", Controller.ListUser)
-	err := e.Run(":9090")
+	e.POST("/user/login", Controller.Login)
+	e.POST("/user/register", Controller.Register)
+	e.GET("/user", Controller.ListUser)
+	err := e.Run()
 	if err != nil {
 		log.Println("e.Run() Failed!")
 	}

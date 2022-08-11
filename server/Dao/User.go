@@ -4,8 +4,9 @@ import (
 	"server/Model"
 )
 
-func (mgr manager) AddUser(user *Model.User) {
-	mgr.db.Create(user)
+func (mgr manager) Register(userinfo Model.User) error {
+	result := mgr.db.Create(&userinfo)
+	return result.Error
 }
 
 func (mgr manager) GetUser() ([]Model.User, error) {
@@ -14,4 +15,11 @@ func (mgr manager) GetUser() ([]Model.User, error) {
 		return users, err
 	}
 	return users, nil
+}
+
+func (mgr manager) IsExist(username string) (Model.User, error) {
+	var userinfo Model.User
+	result := mgr.db.Model(&Model.User{}).Where("username=?", username).Find(&userinfo)
+
+	return userinfo, result.Error
 }

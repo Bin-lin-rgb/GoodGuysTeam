@@ -1,16 +1,18 @@
 package Dao
 
 import (
+	"log"
+	"server/Model"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
-	"log"
-	"server/Model"
 )
 
 type Manager interface {
-	AddUser(user *Model.User)
+	Register(userinfo Model.User) error
 	GetUser() ([]Model.User, error)
+	IsExist(username string) (Model.User, error)
 
 	AddComment(comment *Model.Comment)
 }

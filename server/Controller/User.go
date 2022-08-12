@@ -26,10 +26,10 @@ type MyClaims struct {
 }
 
 func Register(c *gin.Context) {
-	username := c.PostForm("username")
-	password := c.PostForm("password")
+	username := c.Query("username")
+	password := c.Query("password")
 
-	//log.Println(username, "----*****----", password)
+	log.Println(username, "----**register**----", password)
 
 	token, _ := GenToken(username, password)
 
@@ -74,7 +74,7 @@ func Login(c *gin.Context) {
 	username := c.PostForm("username")
 	password := c.PostForm("password")
 
-	//log.Println(username, "----*****----", password)
+	log.Println(username, "----**login**----", password)
 
 	token, _ := GenToken(username, password)
 

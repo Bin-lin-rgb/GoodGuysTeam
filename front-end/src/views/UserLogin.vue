@@ -70,8 +70,11 @@
                       />
                     </el-form-item>
                     <el-form-item class="login-submit">
-                      <el-button type="primary" @click="userBtn(ruleFormRef)"
+                      <el-button type="primary" @click="userBtnL(ruleFormRef)"
                         >登录</el-button
+                      >
+                      <el-button type="primary" @click="userBtnR(ruleFormRef)"
+                        >注册</el-button
                       >
                     </el-form-item>
                     <a class="forgetpwd">忘记密码？</a>
@@ -125,10 +128,12 @@
 // vue
 import { reactive, ref } from "vue";
 // api
-import { login } from "@/utils/api/login";
+import { login, register } from "@/utils/api/login";
 //element
 import { Avatar, Lock } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
+// 加密
+import { Encrypt } from "@/utils/aes";
 
 //账号登录和短信登录切换
 const current = ref(1);
@@ -156,21 +161,43 @@ const rules = reactive({
     { min: 3, max: 11, message: "请输入3-11位密码", trigger: "blur" },
   ],
 });
-//账号密码点击登录
-const userBtn = (formEl: any) => {
+//账号密码点击注册
+const userBtnR = (formEl: any) => {
   if (!formEl) return;
   formEl.validate((valid: unknown, fields: unknown) => {
     if (valid) {
       // console.log("用户名和密码验证成功");
-      login({
-        username: ruleForm.username,
-        password: ruleForm.userpwd,
+      register({
+        username: Encrypt(ruleForm.username),
+        password: Encrypt(ruleForm.userpwd),
       }).then((res: any) => {
         console.log(res);
-        if (res.code == "200") {
+        if (res.code != "0") {
           ElMessage({
             message: res.message,
-            type: "success",
+            type: "error",
+          });
+        }
+      });
+    } else {
+      console.log("error submit!", fields, valid);
+    }
+  });
+};
+//账号密码点击登录
+const userBtnL = (formEl: any) => {
+  if (!formEl) return;
+  formEl.validate((valid: unknown, fields: unknown) => {
+    if (valid) {
+      login({
+        username: Encrypt(ruleForm.username),
+        password: Encrypt(ruleForm.userpwd),
+      }).then((res: any) => {
+        console.log(res);
+        if (res.code != "0") {
+          ElMessage({
+            message: res.message,
+            type: "error",
           });
         }
       });
@@ -339,7 +366,7 @@ section {
   align-items: center;
 }
 .login-submit button {
-  width: 100%;
+  width: 45%;
   height: 35px;
   outline: none;
   border: none;

@@ -2,11 +2,11 @@
   <header>
     <div class="header-content">
       <h1 class="content-logo">
-        <img src="@/assets/logo.svg" />
+        <img src="@/assets/logo.svg" @click="gotoHome"/>
       </h1>
       <div class="content-nav">
         <ul>
-          <li>首页</li>
+          <router-link class="link" to="/">首页</router-link>
           <li>课程</li>
           <li>直播</li>
           <li>活动</li>
@@ -21,7 +21,7 @@
           </el-icon>
         </div>
         <div class="content-create">
-          <el-button type="primary">创作者中心</el-button>
+          <el-button type="primary" @click="gotoCreator">创作者中心</el-button>
         </div>
         <div class="content-BellFilled">
           <el-icon :size="25" color="#8A919F"><BellFilled /></el-icon>
@@ -36,6 +36,15 @@
 
 <script setup lang="ts">
 import { Search, BellFilled } from "@element-plus/icons-vue";
+// Router
+import { useRouter } from "vue-router";
+const router = useRouter();
+function gotoHome() {
+  router.push("/");
+}
+function gotoCreator() {
+  router.push("/creator");
+}
 </script>
 
 <style scoped>
@@ -84,6 +93,11 @@ header {
 }
 
 .content-nav ul li {
+  font-size: 16px;
+  color: #323232;
+}
+
+.content-nav ul .link {
   font-size: 16px;
   color: #323232;
 }

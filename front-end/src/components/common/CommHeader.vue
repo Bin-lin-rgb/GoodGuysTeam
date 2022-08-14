@@ -2,7 +2,7 @@
   <header>
     <div class="header-content">
       <h1 class="content-logo">
-        <img src="@/assets/logo.svg" @click="gotoHome"/>
+        <img src="@/assets/logo.svg" @click="gotoHome" />
       </h1>
       <div class="content-nav">
         <ul>
@@ -13,9 +13,9 @@
           <li>沸点</li>
         </ul>
       </div>
-      <div class="search-buy-login">
+      <div class="search-login">
         <div class="content-search">
-          <input type="" placeholder="请输入要搜索的课程" />
+          <input type="" placeholder="请输入要搜索的内容" />
           <el-icon color="#808080" :size="22">
             <search style="width: 22px; height: 22px" />
           </el-icon>
@@ -29,6 +29,9 @@
         <div class="content-login">
           <router-link to="/login">登录 / 注册</router-link>
         </div>
+        <router-link to="/userinfo"
+          ><el-avatar id="avatar"> user </el-avatar></router-link
+        >
       </div>
     </div>
   </header>
@@ -102,7 +105,7 @@ header {
   color: #323232;
 }
 
-.search-buy-login {
+.search-login {
   display: flex;
   justify-content: space-between;
   align-items: center;

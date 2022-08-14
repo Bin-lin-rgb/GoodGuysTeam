@@ -13,7 +13,9 @@
     <span class="plainText">文章将自动保存至草稿箱</span>
     <el-button type="primary" plain>草稿箱</el-button>
     <el-button type="primary">发布</el-button>
-    <el-avatar id="avatar"> user </el-avatar>
+    <router-link to="/userinfo"
+      ><el-avatar id="avatar"> user </el-avatar></router-link
+    >
   </div>
 </template>
 

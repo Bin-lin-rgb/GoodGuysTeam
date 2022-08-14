@@ -20,7 +20,17 @@ const router = createRouter({
     {
       path: "/creator",
       name: "Creator",
-      component: () => import("../views/Creator/index.vue"),
+      component: () => import("../views/Creator/CreatorIndex.vue"),
+    },
+    {
+      path: "/write",
+      name: "Write",
+      component: () => import("../views/Creator/WriteArticle.vue"),
+    },
+    {
+      path: "/userinfo",
+      name: "UserInfo",
+      component: () => import("../views/UserInfo/UserIndex.vue"),
     },
   ],
 });

@@ -1,10 +1,10 @@
 <template>
-  <CreatorHeader />
+  <ArticleHeader />
   <div class="md"><md-editor v-model="text" /></div>
 </template>
 
 <script setup lang="ts">
-import CreatorHeader from "./CreatorHeader.vue";
+import ArticleHeader from "./ArticleHeader.vue";
 import { ref } from "vue";
 // md-editor-v3
 import MdEditor from "md-editor-v3";

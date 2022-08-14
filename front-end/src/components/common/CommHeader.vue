@@ -10,7 +10,6 @@
           <li>课程</li>
           <li>直播</li>
           <li>活动</li>
-          <li>沸点</li>
         </ul>
       </div>
       <div class="search-login">
@@ -21,7 +20,8 @@
           </el-icon>
         </div>
         <div class="content-create">
-          <el-button type="primary" @click="gotoCreator">创作者中心</el-button>
+          <button @click="gotoCreator">创作者中心</button>
+          <!-- <el-button type="primary" @click="gotoCreator">创作者中心</el-button> -->
         </div>
         <div class="content-BellFilled">
           <el-icon :size="25" color="#8A919F"><BellFilled /></el-icon>
@@ -29,8 +29,8 @@
         <div class="content-login">
           <router-link to="/login">登录 / 注册</router-link>
         </div>
-        <router-link to="/userinfo"
-          ><el-avatar id="avatar"> user </el-avatar></router-link
+        <router-link to="/userinfo" id="avatar"
+          ><el-avatar> user </el-avatar></router-link
         >
       </div>
     </div>
@@ -72,7 +72,7 @@ header {
 }
 
 .content-logo {
-  width: 110px;
+  width: 100px;
   height: 30px;
   margin: 20px 0;
   cursor: pointer;
@@ -83,7 +83,7 @@ header {
 }
 
 .content-nav {
-  width: 400px;
+  width: 300px;
   height: 75px;
 }
 
@@ -133,20 +133,83 @@ header {
   font-size: 16px;
   outline: none;
 }
-.create-button {
-  background: #1e80ff;
-  height: 40px;
-  color: #ffffff;
+.content-create {
+  /* background: #1e80ff; */
+  height: 38px;
+  margin: auto;
+  width: 105px;
+  /* color: #ffffff; */
 }
 
-/* .content-BellFilled {
-  font-size: 23px;
-} */
+.content-BellFilled {
+  /* font-size: 23px; */
+  margin-right: 23px;
+}
+
+/* From uiverse.io by @kirzin */
+button {
+  text-decoration: none;
+  position: absolute;
+  border: none;
+  font-size: 14px;
+  font-family: inherit;
+  color: #fff;
+  width: 8em;
+  height: 2.2em;
+  line-height: 2em;
+  text-align: center;
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 300%;
+  border-radius: 30px;
+  z-index: 1;
+}
+
+button:hover {
+  animation: ani 8s linear infinite;
+  border: none;
+}
+
+@keyframes ani {
+  0% {
+    background-position: 0%;
+  }
+
+  100% {
+    background-position: 400%;
+  }
+}
+
+button:before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  z-index: -1;
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 400%;
+  border-radius: 35px;
+  transition: 1s;
+}
+
+button:hover::before {
+  filter: blur(20px);
+}
+
+button:active {
+  background: linear-gradient(32deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+}
 
 .content-login {
   font-size: 18px;
   color: #808080;
   text-align: center;
   cursor: pointer;
+}
+
+#avatar {
+  position: fixed;
+  right: 20px;
 }
 </style>

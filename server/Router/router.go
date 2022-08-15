@@ -1,7 +1,6 @@
 package Router
 
 import (
-	"log"
 	"server/Controller"
 	"time"
 
@@ -9,8 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Start() {
-	e := gin.Default()
+func Start(r *gin.Engine) {
 
 	mwCORS := cors.New(cors.Config{
 		AllowOrigins:     []string{"*"},
@@ -26,12 +24,9 @@ func Start() {
 		MaxAge: 24 * time.Hour,
 	})
 
-	e.Use(mwCORS)
-	e.POST("/user/login", Controller.Login)
-	e.POST("/user/register", Controller.Register)
-	e.GET("/user", Controller.ListUser)
-	err := e.Run()
-	if err != nil {
-		log.Println("e.Run() Failed!")
-	}
+	r.Use(mwCORS)
+	r.POST("/user/login", Controller.Login)
+	r.POST("/user/register", Controller.Register)
+	r.GET("/user", Controller.ListUser)
+
 }

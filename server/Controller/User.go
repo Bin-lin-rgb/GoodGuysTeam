@@ -1,6 +1,7 @@
 package Controller
 
 import (
+	"go.uber.org/zap"
 	"log"
 	"net/http"
 	"server/Dao"
@@ -29,14 +30,18 @@ func Register(c *gin.Context) {
 	username := c.Query("username")
 	password := c.Query("password")
 
-	log.Println(username, "----**register**----", password)
+	zap.L().Debug("----register----",
+		zap.String("username", username), 
+		zap.String("password", password),
+	)
 
 	token, _ := GenToken(username, password)
 
 	// 查找用户是否存在
 	user, err := Dao.Mgr.IsExist(username)
 	if err != nil {
-		log.Println(err)
+		//log.Println(err)
+		zap.L().Error("Dao.mgr.IsExist(username) Failed", zap.Error(err))
 	}
 
 	if user.Username != "" {

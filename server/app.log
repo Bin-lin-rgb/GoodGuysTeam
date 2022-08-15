@@ -1,0 +1,9 @@
+{"level":"DEBUG","time":"2022-08-15T10:58:34.796+0800","caller":"server/main.go:46","msg":"this is hello func","user":"q1mi","age":18}
+{"level":"INFO","time":"2022-08-15T10:58:34.836+0800","caller":"Logger/logger.go:65","msg":"/hello","status":200,"method":"GET","path":"/hello","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36","errors":"","cost":0.0412595}
+{"level":"INFO","time":"2022-08-15T10:58:34.884+0800","caller":"Logger/logger.go:65","msg":"/favicon.ico","status":404,"method":"GET","path":"/favicon.ico","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36","errors":"","cost":0}
+{"level":"DEBUG","time":"2022-08-15T11:00:36.974+0800","caller":"server/main.go:46","msg":"this is hello func","user":"q1mi","age":18}
+{"level":"INFO","time":"2022-08-15T11:00:36.974+0800","caller":"Logger/logger.go:65","msg":"/hello","status":200,"method":"GET","path":"/hello","query":"","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36","errors":"","cost":0}
+{"level":"DEBUG","time":"2022-08-15T12:22:52.881+0800","caller":"Controller/User.go:34","msg":"----**register**----","username":"","password":""}
+{"level":"DEBUG","time":"2022-08-15T12:23:04.903+0800","caller":"Controller/User.go:34","msg":"----**register**----","username":"","password":""}
+{"level":"DEBUG","time":"2022-08-15T12:24:58.029+0800","caller":"Controller/User.go:34","msg":"----**register**----","username":"ddd","password":"fff"}
+{"level":"DEBUG","time":"2022-08-15T12:25:05.793+0800","caller":"Controller/User.go:34","msg":"----**register**----","username":"ddd","password":"fff"}

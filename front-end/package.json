@@ -2,7 +2,7 @@
   "name": "front-end",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 9090",
     "build": "run-p type-check build-only",
     "preview": "vite preview --port 4173",
     "build-only": "vite build",
@@ -15,7 +15,7 @@
     "crypto-js": "^4.1.1",
     "element-plus": "^2.2.12",
     "md-editor-v3": "^2.2.1",
-    "pinia": "^2.0.16",
+    "pinia": "^2.0.18",
     "pinia-plugin-persist": "^1.0.0",
     "vue": "^3.2.37",
     "vue-router": "^4.1.2"

@@ -1,122 +1,143 @@
 package Controller
 
 import (
+	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
+	"golang.org/x/crypto/bcrypt"
 	"log"
 	"net/http"
 	"server/Dao"
 	"server/Model"
-	"server/response"
-
-	"github.com/dgrijalva/jwt-go"
-	"github.com/gin-gonic/gin"
-	"golang.org/x/crypto/bcrypt"
+	"server/pkg/jwt"
+	"server/pkg/snowflake"
+	"strings"
 )
 
 type UserLoginResponse struct {
-	response.Response
-	UserId int64  `json:"user_id,omitempty"`
-	Token  string `json:"token"`
-}
-
-// MyClaims 自定义声明结构体并内嵌 jwt.StandardClaims
-type MyClaims struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-	jwt.StandardClaims
+	Response
+	UserId       uint64 `json:"user_id,omitempty"`
+	Username     string `json:"username"`
+	AccessToken  string `json:"access_token"`
+	RefreshToken string `json:"refresh_token"`
 }
 
 func Register(c *gin.Context) {
 	username := c.Query("username")
 	password := c.Query("password")
 
-	zap.L().Debug("----register----",
-		zap.String("username", username), 
-		zap.String("password", password),
-	)
+	id, err := snowflake.GetID()
+	if err != nil {
+		zap.L().Error("snowflake.GetID() failed", zap.Error(err))
+	}
 
-	token, _ := GenToken(username, password)
+	zap.L().Debug("----register----",
+		zap.String("username", username),
+		zap.String("password", password),
+		zap.Uint64("id", id),
+	)
 
 	// 查找用户是否存在
 	user, err := Dao.Mgr.IsExist(username)
 	if err != nil {
-		//log.Println(err)
 		zap.L().Error("Dao.mgr.IsExist(username) Failed", zap.Error(err))
 	}
 
 	if user.Username != "" {
-		log.Println("User already exist")
-		c.JSON(http.StatusOK, UserLoginResponse{
-			Response: response.Response{Code: 1, Message: "User already exist"},
-		})
+		ResponseError(c, CodeUserExist)
 		return
 	}
 
 	// encrypted : 已加密的密码
 	encrypted, _ := GetPwd(password)
 	userinfo := Model.User{
+		UserId:   id,
 		Username: username,
 		Password: string(encrypted),
 	}
 	// 将加密的密码写入数据库
 	err = Dao.Mgr.Register(userinfo)
 	if err != nil {
-		log.Println(err)
-		c.JSON(http.StatusOK, UserLoginResponse{
-			Response: response.Response{Code: 1, Message: "请更换一个账户名称。"},
-		})
+		ResponseError(c, CodeSQLError)
 		return
 	}
 
-	c.JSON(http.StatusOK, UserLoginResponse{
-		Response: response.Response{Code: 0},
-		UserId:   userinfo.Id,
-		Token:    token,
+	ResponseSuccess(c, gin.H{
+		"user_id":   id,
+		"user_name": username,
 	})
+
 }
 
 func Login(c *gin.Context) {
-	username := c.PostForm("username")
-	password := c.PostForm("password")
-
-	log.Println(username, "----**login**----", password)
-
-	token, _ := GenToken(username, password)
+	username := c.Query("username")
+	password := c.Query("password")
 
 	// 查找用户是否存在
 	user, err := Dao.Mgr.IsExist(username)
 	if err != nil {
-		log.Println(err)
+		zap.L().Error("Dao.Mgr.IsExist(username) failed", zap.String("username", username), zap.Error(err))
+	}
+
+	AccessToken, RefreshToken, err := jwt.GenToken(user.UserId, user.Username)
+	if err != nil {
+		zap.L().Error("GenToken failed", zap.String("username", username), zap.Error(err))
 	}
 
 	if user.Username == "" {
-		log.Println("User doesn't exist")
-		c.JSON(http.StatusOK, UserLoginResponse{
-			Response: response.Response{Code: 1, Message: "User doesn't exist"},
-		})
+		ResponseError(c, CodeUserNotExist)
 		return
 	}
 
 	if ComparePwd(user.Password, password) {
-		log.Println("Login successful!")
-		c.JSON(http.StatusOK, UserLoginResponse{
-			Response: response.Response{Code: 0, Message: "Login successful!"},
-			UserId:   user.Id,
-			Token:    token,
+		ResponseSuccess(c, UserLoginResponse{
+			UserId:       user.UserId,
+			Username:     username,
+			AccessToken:  AccessToken,
+			RefreshToken: RefreshToken,
 		})
 	} else {
-		c.JSON(http.StatusOK, UserLoginResponse{
-			Response: response.Response{Code: 1, Message: "Password is not correct."},
-		})
+		ResponseError(c, CodeInvalidPassword)
 	}
 }
 
 func ListUser(c *gin.Context) {
 	users, err := Dao.Mgr.GetUser()
 	if err != nil {
-		response.Failed("返回失败！", c)
+		Failed("返回失败！", c)
 	}
-	response.Success("数据返回成功！", users, c)
+	Success("数据返回成功！", users, c)
+}
+
+func RefreshTokenHandler(c *gin.Context) {
+	rt := c.Query("refresh_token")
+	// 客户端携带Token有三种方式 1.放在请求头 2.放在请求体 3.放在URL
+	// 这里假设Token放在Header的Authorization中，并使用Bearer开头
+	authHeader := c.Request.Header.Get("Authorization")
+	if authHeader == "" {
+		ResponseErrorWithMsg(c, CodeInvalidToken, "请求头缺少Auth Token")
+		c.Abort()
+		return
+	}
+	// 按空格分割
+	parts := strings.SplitN(authHeader, " ", 2)
+	if !(len(parts) == 2 && parts[0] == "Bearer") {
+		ResponseErrorWithMsg(c, CodeInvalidToken, "Token格式不对")
+		c.Abort()
+		return
+	}
+	aToken, rToken, err := jwt.RefreshToken(parts[1], rt)
+	if err != nil {
+		zap.L().Error("RefreshToken Failed", zap.Error(err))
+	}
+	id, err := GetCurrentUserID(c)
+	if err != nil {
+		zap.L().Error("GetCurrentUserID Failed", zap.Error(err))
+	}
+	log.Println("--------", id)
+	c.JSON(http.StatusOK, gin.H{
+		"access_token":  aToken,
+		"refresh_token": rToken,
+	})
 }
 
 // GetPwd 给密码加密

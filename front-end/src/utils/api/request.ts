@@ -6,6 +6,11 @@ const service = axios.create();
 //2. 请求拦截器
 service.interceptors.request.use(
   (config) => {
+    // let loginResult = JSON.parse(localStorage.getItem("loginResult")); // 解析从localStorage里拿出的loginResult
+    // if (loginResult) {
+    //   const token = loginResult.token; // 取出accessToken
+    //   config.headers.Authorization = `Bearer ${token}`; // 将accessToken放入到请求头里
+    // }
     return config;
   },
   (error) => {
@@ -16,8 +21,11 @@ service.interceptors.request.use(
 //3. 响应拦截器
 service.interceptors.response.use(
   (response) => {
-    //判断code码
-    return response.data;
+    if (response.status === 200) {
+      return Promise.resolve(response.data);
+    } else {
+      return Promise.reject(response.data);
+    }
   },
   (error) => {
     return Promise.reject(error);

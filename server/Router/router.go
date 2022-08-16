@@ -2,6 +2,7 @@ package Router
 
 import (
 	"server/Controller"
+	middlewares "server/middleware"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -9,6 +10,7 @@ import (
 )
 
 func Start(r *gin.Engine) {
+	r.Static("/static", "./static") // 加载静态文件
 
 	mwCORS := cors.New(cors.Config{
 		AllowOrigins:     []string{"*"},
@@ -25,8 +27,17 @@ func Start(r *gin.Engine) {
 	})
 
 	r.Use(mwCORS)
-	r.POST("/user/login", Controller.Login)
-	r.POST("/user/register", Controller.Register)
-	r.GET("/user", Controller.ListUser)
+
+	v1 := r.Group("/v1")
+	v1.POST("/user/login", Controller.Login)
+	v1.POST("/user/register", Controller.Register)
+	//r.GET("/user", Controller.ListUser)
+
+	v1.Use(middlewares.JWTAuthMiddleware())
+
+	{
+		r.GET("/user", Controller.ListUser)
+		v1.GET("/refresh_token", Controller.RefreshTokenHandler)
+	}
 
 }

@@ -134,6 +134,9 @@ import { Avatar, Lock } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 // 加密
 import { Encrypt } from "@/utils/aes";
+// store
+import { useUserStore } from "../stores/user";
+const userStore = useUserStore();
 
 //账号登录和短信登录切换
 const current = ref(1);
@@ -168,16 +171,21 @@ const userBtnR = (formEl: any) => {
     if (valid) {
       // console.log("用户名和密码验证成功");
       register({
-        username: Encrypt(ruleForm.username),
+        username: ruleForm.username,
         password: Encrypt(ruleForm.userpwd),
       }).then((res: any) => {
         console.log(res);
-        if (res.code != "0") {
+        if (res.code != 1000) {
           ElMessage({
             message: res.message,
             type: "error",
           });
+          return;
         }
+        ElMessage({
+          message: `${ruleForm.username}注册成功！`,
+          type: "success",
+        });
       });
     } else {
       console.log("error submit!", fields, valid);
@@ -190,16 +198,24 @@ const userBtnL = (formEl: any) => {
   formEl.validate((valid: unknown, fields: unknown) => {
     if (valid) {
       login({
-        username: Encrypt(ruleForm.username),
+        username: ruleForm.username,
         password: Encrypt(ruleForm.userpwd),
       }).then((res: any) => {
         console.log(res);
-        if (res.code != "0") {
+        if (res.code != 1000) {
           ElMessage({
             message: res.message,
             type: "error",
           });
+          return;
         }
+        ElMessage({
+          message: `${ruleForm.username}登陆成功！`,
+          type: "success",
+        });
+
+        userStore.setToken(res.data.access_token);
+        console.log(userStore.token);
       });
     } else {
       console.log("error submit!", fields, valid);
@@ -244,7 +260,7 @@ section {
   position: relative;
   width: 500px;
   height: 500px;
-  background: url(../assets/img/ybbg.jpeg) no-repeat center center;
+  /* background: url(../assets/img/ybbg.jpeg) no-repeat center center; */
 }
 
 .nav-tabs {

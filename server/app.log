@@ -7,3 +7,27 @@
 {"level":"DEBUG","time":"2022-08-15T12:23:04.903+0800","caller":"Controller/User.go:34","msg":"----**register**----","username":"","password":""}
 {"level":"DEBUG","time":"2022-08-15T12:24:58.029+0800","caller":"Controller/User.go:34","msg":"----**register**----","username":"ddd","password":"fff"}
 {"level":"DEBUG","time":"2022-08-15T12:25:05.793+0800","caller":"Controller/User.go:34","msg":"----**register**----","username":"ddd","password":"fff"}
+{"level":"DEBUG","time":"2022-08-15T21:12:21.501+0800","caller":"Controller/User.go:25","msg":"----register----","username":"ddd","password":"fff"}
+{"level":"DEBUG","time":"2022-08-15T21:12:32.901+0800","caller":"Controller/User.go:25","msg":"----register----","username":"dddf","password":"fff"}
+{"level":"DEBUG","time":"2022-08-15T21:41:35.141+0800","caller":"Controller/User.go:31","msg":"----register----","username":"dddff","password":"fff","id":138804778472833025}
+{"level":"DEBUG","time":"2022-08-15T21:48:34.336+0800","caller":"Controller/User.go:31","msg":"----register----","username":"ddff","password":"fff","id":138805481756950529}
+{"level":"DEBUG","time":"2022-08-15T21:54:19.525+0800","caller":"Controller/User.go:31","msg":"----register----","username":"FF099047AB5218D421D23B2AE1F4D746","password":"9915EF7CEE3E42478C81DFFB9B6219B7","id":138806060889669633}
+{"level":"DEBUG","time":"2022-08-15T21:55:18.323+0800","caller":"Controller/User.go:31","msg":"----register----","username":"FB45A39E700CAD0FB550F348D15085AC","password":"C5952823246D343FD7573F00D85D2C74","id":138806159539699713}
+{"level":"DEBUG","time":"2022-08-15T22:00:24.178+0800","caller":"Controller/User.go:31","msg":"----register----","username":"B96CE08CB6943A02BF6A739481D15978","password":"7AE2FB85B61449F40F4ED58F6F5BE47F","id":138806672670851073}
+{"level":"DEBUG","time":"2022-08-15T22:02:12.573+0800","caller":"Controller/User.go:31","msg":"----register----","username":"B96CE08CB6943A02BF6A739481D15978","password":"7AE2FB85B61449F40F4ED58F6F5BE47F","id":138806854535872513}
+{"level":"DEBUG","time":"2022-08-15T22:02:16.397+0800","caller":"Controller/User.go:31","msg":"----register----","username":"4E446F05E5D6720666BA26FAC4422282","password":"7AE2FB85B61449F40F4ED58F6F5BE47F","id":138806860944769025}
+{"level":"DEBUG","time":"2022-08-15T22:05:45.533+0800","caller":"Controller/User.go:31","msg":"----register----","username":"abcds","password":"7AE2FB85B61449F40F4ED58F6F5BE47F","id":138807211823464449}
+{"level":"DEBUG","time":"2022-08-15T22:07:09.399+0800","caller":"Controller/User.go:31","msg":"----register----","username":"abcd","password":"7AE2FB85B61449F40F4ED58F6F5BE47F","id":138807352517197825}
+{"level":"INFO","time":"2022-08-16T16:42:37.236+0800","caller":"Logger/logger.go:65","msg":"/user/register","status":404,"method":"POST","path":"/user/register","query":"username=ddff&password=fff","ip":"::1","user-agent":"PostmanRuntime/7.29.2","errors":"","cost":0}
+{"level":"DEBUG","time":"2022-08-16T16:42:55.265+0800","caller":"Controller/User.go:34","msg":"----register----","username":"ddff","password":"fff","id":138919669049327617}
+{"level":"DEBUG","time":"2022-08-16T16:45:06.699+0800","caller":"Controller/User.go:34","msg":"----register----","username":"ddff","password":"fff","id":138919889552277505}
+{"level":"INFO","time":"2022-08-16T16:49:13.710+0800","caller":"Logger/logger.go:65","msg":"/v1/user","status":404,"method":"GET","path":"/v1/user","query":"","ip":"::1","user-agent":"PostmanRuntime/7.29.2","errors":"","cost":0}
+{"level":"ERROR","time":"2022-08-16T17:04:40.453+0800","caller":"Controller/User.go:130","msg":"RefreshToken Failed","error":"token contains an invalid number of segments"}
+{"level":"ERROR","time":"2022-08-16T17:04:40.489+0800","caller":"Controller/User.go:134","msg":"GetCurrentUserID Failed","error":"当前用户未登录"}
+{"level":"ERROR","time":"2022-08-16T17:05:36.024+0800","caller":"Controller/User.go:130","msg":"RefreshToken Failed","error":"token contains an invalid number of segments"}
+{"level":"ERROR","time":"2022-08-16T17:07:08.681+0800","caller":"Controller/User.go:130","msg":"RefreshToken Failed","error":"token contains an invalid number of segments"}
+{"level":"ERROR","time":"2022-08-16T17:11:16.358+0800","caller":"Controller/User.go:130","msg":"RefreshToken Failed","error":"token contains an invalid number of segments"}
+{"level":"INFO","time":"2022-08-16T17:42:40.852+0800","caller":"Logger/logger.go:65","msg":"/user/register","status":404,"method":"POST","path":"/user/register","query":"username=abcd&password=7AE2FB85B61449F40F4ED58F6F5BE47F","ip":"::1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36","errors":"","cost":0}
+{"level":"DEBUG","time":"2022-08-16T17:43:12.038+0800","caller":"Controller/User.go:33","msg":"----register----","username":"abcd","password":"7AE2FB85B61449F40F4ED58F6F5BE47F","id":138925736982478849}
+{"level":"DEBUG","time":"2022-08-16T17:43:22.566+0800","caller":"Controller/User.go:33","msg":"----register----","username":"123","password":"BDC350E2C9852BCDEB09BF27448E4C56","id":138925754648887297}
+{"level":"DEBUG","time":"2022-08-16T18:04:43.731+0800","caller":"Controller/User.go:33","msg":"----register----","username":"123","password":"BDC350E2C9852BCDEB09BF27448E4C56","id":138927904095469569}

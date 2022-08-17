@@ -36,7 +36,7 @@ func Start(r *gin.Engine) {
 	v1.Use(middlewares.JWTAuthMiddleware())
 
 	{
-		r.GET("/user", Controller.ListUser)
+		v1.GET("/user", Controller.ListUser)
 		v1.GET("/refresh_token", Controller.RefreshTokenHandler)
 	}
 

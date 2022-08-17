@@ -11,7 +11,7 @@
  Target Server Version : 50738
  File Encoding         : 65001
 
- Date: 08/08/2022 22:05:34
+ Date: 17/08/2022 22:07:56
 */
 
 SET NAMES utf8mb4;
@@ -63,8 +63,6 @@ CREATE TABLE `community`  (
 -- ----------------------------
 INSERT INTO `community` VALUES (1, 1, 'Go', 'Golang', '2016-11-01 08:10:10', '2016-11-01 08:10:10');
 INSERT INTO `community` VALUES (2, 2, 'leetcode', '刷题刷题刷题', '2020-01-01 08:00:00', '2020-01-01 08:00:00');
-INSERT INTO `community` VALUES (3, 3, 'PUBG', '大吉大利，今晚吃鸡。', '2018-08-07 08:30:00', '2018-08-07 08:30:00');
-INSERT INTO `community` VALUES (4, 4, 'LOL', '欢迎来到英雄联盟!', '2016-01-01 08:00:00', '2016-01-01 08:00:00');
 
 -- ----------------------------
 -- Table structure for post
@@ -105,17 +103,16 @@ CREATE TABLE `user`  (
   `created_at` datetime(3) NULL DEFAULT NULL,
   `updated_at` datetime(3) NULL DEFAULT NULL,
   `deleted_at` datetime(3) NULL DEFAULT NULL,
+  `user_id` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `idx_username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 50 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'tom', '123456', '', 0, NULL, NULL, NULL);
-INSERT INTO `user` VALUES (4, 'tom2', '123456', '', 0, NULL, NULL, NULL);
-INSERT INTO `user` VALUES (5, 'tom3', '123456', '', 0, '2022-08-08 20:22:21.807', '2022-08-08 20:22:21.807', NULL);
-INSERT INTO `user` VALUES (6, '', '', '', 0, '2022-08-08 21:47:31.456', '2022-08-08 21:47:31.456', NULL);
-INSERT INTO `user` VALUES (8, 'postman', '1234567890', '', 0, '2022-08-08 21:58:37.964', '2022-08-08 21:58:37.964', NULL);
+INSERT INTO `user` VALUES (47, 'abcd', '$2a$10$Gc8g44IM/V/EDDn6kd5En.25l96dEatECv2.CCIvSmpmq/9Hz.xmi', '', 0, '2022-08-15 22:07:09.460', '2022-08-15 22:07:09.460', NULL, 138807352517197825);
+INSERT INTO `user` VALUES (48, 'ddff', '$2a$10$F09P5EZpEADzsmf/djWODevj5hwhw/QChuHIhPOKdUVN88XaD5UgO', '', 0, '2022-08-16 16:42:55.323', '2022-08-16 16:42:55.323', NULL, 138919669049327617);
+INSERT INTO `user` VALUES (49, '123', '$2a$10$imYj9LjGpakv28RdA6Xmx.KbbBwkrTLFpfUblO7K/qD6FmxLIdjG6', '', 0, '2022-08-16 17:43:22.623', '2022-08-16 17:43:22.623', NULL, 138925754648887297);
 
 SET FOREIGN_KEY_CHECKS = 1;

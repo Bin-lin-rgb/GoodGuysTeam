@@ -4,7 +4,7 @@
       <div class="login-box">
         <!-- 登录框左侧 -->
         <div class="login-left">
-          <a href="/" title="小鹿线" class="logo">
+          <a href="/" title="---" class="logo">
             <img src="../assets/img/logo02.png" alt="a logo" title="a logo" />
           </a>
           <div class="left-qrcode">
@@ -129,6 +129,8 @@
 import { reactive, ref } from "vue";
 // api
 import { login, register } from "@/utils/api/login";
+// router
+import { useRouter } from "vue-router";
 //element
 import { Avatar, Lock } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
@@ -136,7 +138,9 @@ import { ElMessage } from "element-plus";
 import { Encrypt } from "@/utils/aes";
 // store
 import { useUserStore } from "../stores/user";
+
 const userStore = useUserStore();
+const router = useRouter();
 
 //账号登录和短信登录切换
 const current = ref(1);
@@ -215,7 +219,8 @@ const userBtnL = (formEl: any) => {
         });
 
         userStore.setToken(res.data.access_token);
-        console.log(userStore.token);
+        router.go(-1);
+        // router.push("/test");
       });
     } else {
       console.log("error submit!", fields, valid);

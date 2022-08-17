@@ -17,6 +17,9 @@ export const useUserStore = defineStore({
     setToken(token: any) {
       this.token = token;
     },
+    clearToken() {
+      this.token = "";
+    }
   },
   // 开启数据缓存
   persist: {

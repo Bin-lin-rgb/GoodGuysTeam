@@ -13,3 +13,9 @@ export function register(data: any) {
     method: "post",
   });
 }
+
+export function getUserInfo() {
+  return request({
+    url: `http://localhost:8080/v1/user`,
+  });
+}

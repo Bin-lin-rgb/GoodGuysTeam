@@ -8,10 +8,10 @@ type User struct {
 	gorm.Model
 	Id       int64  `json:"id"`
 	UserId   uint64 `json:"user_id"`
-	Username string `json:"username,omitempty"`
+	Username string `json:"username"`
 	Password string `json:"password,omitempty"`
-	Email    string `json:"email,omitempty"`
-	Gender   int8   `json:"gender,omitempty"`
+	Email    string `json:"email"`
+	Gender   int8   `json:"gender"`
 }
 
 type Comment struct {

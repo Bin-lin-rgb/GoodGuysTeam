@@ -101,11 +101,21 @@ func Login(c *gin.Context) {
 }
 
 func ListUser(c *gin.Context) {
-	users, err := Dao.Mgr.GetUser()
+
+	// 获取当前请求的UserID(从c取到当前发请求的用户ID)
+	userID, err := GetCurrentUserID(c)
 	if err != nil {
-		Failed("返回失败！", c)
+		zap.L().Error("GetCurrentUserID() failed", zap.Error(err))
+		ResponseError(c, CodeNotLogin)
+		return
 	}
-	Success("数据返回成功！", users, c)
+
+	user, err := Dao.Mgr.GetUser(userID)
+	if err != nil {
+		ResponseError(c, CodeUserNotExist)
+	}
+
+	ResponseSuccess(c, user)
 }
 
 func RefreshTokenHandler(c *gin.Context) {

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useUserStore } from "@/stores/user";
 
 //1. 创建axios对象
 const service = axios.create();
@@ -6,11 +7,14 @@ const service = axios.create();
 //2. 请求拦截器
 service.interceptors.request.use(
   (config) => {
-    // let loginResult = JSON.parse(localStorage.getItem("loginResult")); // 解析从localStorage里拿出的loginResult
-    // if (loginResult) {
-    //   const token = loginResult.token; // 取出accessToken
-    //   config.headers.Authorization = `Bearer ${token}`; // 将accessToken放入到请求头里
-    // }
+    const userStore = useUserStore();
+    const token = userStore.token;
+    if (token) {
+      if (config && config.headers) {
+        // 多一步判断
+        config.headers.Authorization = `Bearer ${token}`; // 将accessToken放入到请求头里
+      }
+    }
     return config;
   },
   (error) => {

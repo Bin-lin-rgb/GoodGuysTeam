@@ -11,7 +11,7 @@ import (
 
 type Manager interface {
 	Register(userinfo Model.User) error
-	GetUser() ([]Model.User, error)
+	GetUser(userId uint64) ([]Model.User, error)
 	IsExist(username string) (Model.User, error)
 
 	AddComment(comment *Model.Comment)

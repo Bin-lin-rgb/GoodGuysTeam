@@ -28,7 +28,7 @@ func GenToken(userId uint64, username string) (aToken, rToken string, err error)
 		userId,   // 自定义字段
 		username, // 自定义字段
 		jwt.StandardClaims{ // JWT规定的7个官方字段
-			ExpiresAt: time.Now().Add(10 * time.Hour).Unix(), // 过期时间
+			ExpiresAt: time.Now().Add(24 * time.Hour).Unix(), // 过期时间
 			Issuer:    "GoodGuysTeam",                        // 签发人
 		},
 	}

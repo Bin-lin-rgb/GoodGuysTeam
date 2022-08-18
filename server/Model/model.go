@@ -1,6 +1,8 @@
 package Model
 
 import (
+	"encoding/json"
+	"errors"
 	"gorm.io/gorm"
 )
 
@@ -27,9 +29,41 @@ type Comment struct {
 type Post struct {
 	gorm.Model
 	Id          int64  `json:"id,omitempty"`
-	Title       string `json:"title,omitempty"`        // 标题
-	Content     string `json:"content,omitempty"`      // 内容
-	AuthorId    int64  `json:"author_id,omitempty"`    // 作者的用户id
-	CommunityId int64  `json:"community_id,omitempty"` // 所属社区
-	Status      int8   `json:"status,omitempty"`       // 帖子状态
+	PostId      uint64 `json:"post_id"`
+	Title       string `json:"title,omitempty" binding:"required"`        // 标题
+	Content     string `json:"content,omitempty" binding:"required"`      // 内容
+	AuthorId    uint64 `json:"author_id,omitempty"`                       // 作者的用户id
+	CommunityId uint64 `json:"community_id,omitempty" binding:"required"` // 所属社区
+	Status      int8   `json:"status,omitempty"`                          // 帖子状态
+}
+
+type Community struct {
+	Id            int32  `json:"id,omitempty"`
+	CommunityId   uint64 `json:"community_id,omitempty"`
+	CommunityName string `json:"community_name,omitempty"`
+	Introduction  string `json:"introduction,omitempty"`
+}
+
+// UnmarshalJSON 为Post类型实现自定义的UnmarshalJSON方法
+func (p *Post) UnmarshalJSON(data []byte) (err error) {
+	required := struct {
+		Title       string `json:"title"`
+		Content     string `json:"content"`
+		CommunityID int64  `json:"community_id"`
+	}{}
+	err = json.Unmarshal(data, &required)
+	if err != nil {
+		return
+	} else if len(required.Title) == 0 {
+		err = errors.New("帖子标题不能为空")
+	} else if len(required.Content) == 0 {
+		err = errors.New("帖子内容不能为空")
+	} else if required.CommunityID == 0 {
+		err = errors.New("未指定版块")
+	} else {
+		p.Title = required.Title
+		p.Content = required.Content
+		p.CommunityId = uint64(required.CommunityID)
+	}
+	return
 }

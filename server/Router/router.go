@@ -31,13 +31,14 @@ func Start(r *gin.Engine) {
 	v1 := r.Group("/v1")
 	v1.POST("/user/login", Controller.Login)
 	v1.POST("/user/register", Controller.Register)
-	//r.GET("/user", Controller.ListUser)
+	v1.GET("/community", Controller.GetCommunity) // 获取分类社区列表
+	v1.GET("/refreshToken", Controller.RefreshTokenHandler)
 
 	v1.Use(middlewares.JWTAuthMiddleware())
 
 	{
 		v1.GET("/user", Controller.ListUser)
-		v1.GET("/refresh_token", Controller.RefreshTokenHandler)
+		v1.POST("/post", Controller.PostArticle) // 发布文章
 	}
 
 }

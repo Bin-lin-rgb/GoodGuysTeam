@@ -31,3 +31,20 @@
 {"level":"DEBUG","time":"2022-08-16T17:43:12.038+0800","caller":"Controller/User.go:33","msg":"----register----","username":"abcd","password":"7AE2FB85B61449F40F4ED58F6F5BE47F","id":138925736982478849}
 {"level":"DEBUG","time":"2022-08-16T17:43:22.566+0800","caller":"Controller/User.go:33","msg":"----register----","username":"123","password":"BDC350E2C9852BCDEB09BF27448E4C56","id":138925754648887297}
 {"level":"DEBUG","time":"2022-08-16T18:04:43.731+0800","caller":"Controller/User.go:33","msg":"----register----","username":"123","password":"BDC350E2C9852BCDEB09BF27448E4C56","id":138927904095469569}
+{"level":"ERROR","time":"2022-08-18T15:01:04.208+0800","caller":"Controller/User.go:140","msg":"RefreshToken Failed","error":"token contains an invalid number of segments"}
+{"level":"INFO","time":"2022-08-18T15:12:17.920+0800","caller":"Logger/logger.go:65","msg":"/v1/refresh_token？eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjMzOTgwMTQsImlzcyI6Ikdvb2RHdXlzVGVhbSJ9.LA6Sv1Uwox-pZ5jLLX0seV31D6R5AgPiEQRkY1uOIs4","status":404,"method":"GET","path":"/v1/refresh_token？eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjMzOTgwMTQsImlzcyI6Ikdvb2RHdXlzVGVhbSJ9.LA6Sv1Uwox-pZ5jLLX0seV31D6R5AgPiEQRkY1uOIs4","query":"","ip":"::1","user-agent":"PostmanRuntime/7.29.2","errors":"","cost":0.0002301}
+{"level":"ERROR","time":"2022-08-18T15:12:32.060+0800","caller":"Controller/User.go:140","msg":"RefreshToken Failed","error":"token contains an invalid number of segments"}
+{"level":"ERROR","time":"2022-08-18T15:13:46.495+0800","caller":"Controller/User.go:139","msg":"RefreshToken Failed","error":"token contains an invalid number of segments"}
+{"level":"ERROR","time":"2022-08-18T15:24:30.433+0800","caller":"Controller/User.go:139","msg":"RefreshToken Failed","error":"token contains an invalid number of segments"}
+{"level":"ERROR","time":"2022-08-18T15:25:01.336+0800","caller":"Controller/User.go:139","msg":"RefreshToken Failed","error":"token contains an invalid number of segments"}
+{"level":"INFO","time":"2022-08-18T15:59:54.986+0800","caller":"Logger/logger.go:65","msg":"/v1/post","status":404,"method":"GET","path":"/v1/post","query":"","ip":"::1","user-agent":"PostmanRuntime/7.29.2","errors":"","cost":0}
+{"level":"DEBUG","time":"2022-08-18T16:03:31.282+0800","caller":"Controller/post.go:14","msg":"c.ShouldBindJSON(post) err","err":"json: cannot unmarshal string into Go struct field Post.community_id of type int64"}
+{"level":"ERROR","time":"2022-08-18T16:03:31.282+0800","caller":"Controller/post.go:15","msg":"create post with invalid param"}
+{"level":"DEBUG","time":"2022-08-18T16:32:27.261+0800","caller":"Controller/post.go:15","msg":"c.ShouldBindJSON(post) err","err":"json: cannot unmarshal string into Go struct field .community_id of type int64"}
+{"level":"ERROR","time":"2022-08-18T16:32:27.298+0800","caller":"Controller/post.go:16","msg":"create post with invalid param"}
+{"level":"DEBUG","time":"2022-08-18T16:37:35.031+0800","caller":"Controller/post.go:15","msg":"c.ShouldBindJSON(post) err","err":"invalid character '}' looking for beginning of object key string"}
+{"level":"ERROR","time":"2022-08-18T16:37:35.031+0800","caller":"Controller/post.go:16","msg":"create post with invalid param"}
+{"level":"DEBUG","time":"2022-08-18T16:37:43.247+0800","caller":"Controller/post.go:15","msg":"c.ShouldBindJSON(post) err","err":"未指定版块"}
+{"level":"ERROR","time":"2022-08-18T16:37:43.247+0800","caller":"Controller/post.go:16","msg":"create post with invalid param"}
+{"level":"DEBUG","time":"2022-08-18T16:37:59.574+0800","caller":"Controller/post.go:15","msg":"c.ShouldBindJSON(post) err","err":"帖子内容不能为空"}
+{"level":"ERROR","time":"2022-08-18T16:37:59.574+0800","caller":"Controller/post.go:16","msg":"create post with invalid param"}

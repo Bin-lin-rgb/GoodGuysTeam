@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"golang.org/x/crypto/bcrypt"
-	"log"
 	"net/http"
 	"server/Dao"
 	"server/Model"
@@ -101,7 +100,6 @@ func Login(c *gin.Context) {
 }
 
 func ListUser(c *gin.Context) {
-
 	// 获取当前请求的UserID(从c取到当前发请求的用户ID)
 	userID, err := GetCurrentUserID(c)
 	if err != nil {
@@ -138,12 +136,9 @@ func RefreshTokenHandler(c *gin.Context) {
 	aToken, rToken, err := jwt.RefreshToken(parts[1], rt)
 	if err != nil {
 		zap.L().Error("RefreshToken Failed", zap.Error(err))
+		ResponseError(c, CodeRefreshTokenError)
+		return
 	}
-	id, err := GetCurrentUserID(c)
-	if err != nil {
-		zap.L().Error("GetCurrentUserID Failed", zap.Error(err))
-	}
-	log.Println("--------", id)
 	c.JSON(http.StatusOK, gin.H{
 		"access_token":  aToken,
 		"refresh_token": rToken,

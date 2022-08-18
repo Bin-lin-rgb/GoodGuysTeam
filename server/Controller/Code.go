@@ -15,6 +15,7 @@ const (
 	CodeInvalidAuthFormat MyCode = 1007
 	CodeNotLogin          MyCode = 1008
 	CodeSQLError          MyCode = 1009
+	CodeRefreshTokenError MyCode = 1010
 )
 
 var msgFlags = map[MyCode]string{
@@ -28,6 +29,7 @@ var msgFlags = map[MyCode]string{
 	CodeInvalidAuthFormat: "认证格式有误",
 	CodeNotLogin:          "未登录",
 	CodeSQLError:          "数据错误",
+	CodeRefreshTokenError: "token刷新失败",
 }
 
 func (c MyCode) Msg() string {

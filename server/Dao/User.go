@@ -9,13 +9,13 @@ func (mgr manager) Register(userinfo Model.User) error {
 	return result.Error
 }
 
-func (mgr manager) GetUser(userId uint64) ([]Model.User, error) {
-	var users []Model.User
+func (mgr manager) GetUser(userId uint64) (Model.User, error) {
+	var user Model.User
 	if err := mgr.db.Select("user_id", "username", "email", "gender", "created_at").
-		Where("user_id=?", userId).Find(&users).Error; err != nil {
-		return users, err
+		Where("user_id=?", userId).Find(&user).Error; err != nil {
+		return user, err
 	}
-	return users, nil
+	return user, nil
 }
 
 func (mgr manager) IsExist(username string) (Model.User, error) {

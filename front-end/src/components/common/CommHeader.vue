@@ -20,7 +20,13 @@
           </el-icon>
         </div>
         <div class="content-create">
-          <button @click="gotoCreator">创作者中心</button>
+          <button class="cta" @click="gotoCreator">
+            <span>创作者中心</span>
+            <svg viewBox="0 0 13 10" height="10px" width="15px">
+              <path d="M1,5 L11,5"></path>
+              <polyline points="8 1 12 5 8 9"></polyline>
+            </svg>
+          </button>
         </div>
         <div class="content-BellFilled">
           <el-icon :size="25" color="#8A919F"><BellFilled /></el-icon>
@@ -66,26 +72,10 @@ import { ElMessage, ElMessageBox } from "element-plus";
 const router = useRouter();
 //用户是否是登录状态
 const isLogin = ref(false);
-//显示用户更多数据
+// 划过头像展示
 const isShow = ref(false);
+//显示用户更多数据
 const userInfo = ref();
-
-function gotoHome() {
-  router.push("/");
-}
-function gotoCreator() {
-  router.push("/creator");
-}
-function gotoUserinfo() {
-  router.push("/userinfo");
-}
-function gotoWrite() {
-  const routeData = router.resolve({
-    // query: {id:deviceId},
-    path: "/write",
-  });
-  window.open(routeData.href, "_blank");
-}
 
 function Logout() {
   ElMessageBox.confirm("确定退出登录吗？", "提示", {
@@ -115,10 +105,26 @@ onBeforeMount(() => {
     // console.log(res);
     if (res.code == 1000) {
       isLogin.value = true;
-      userInfo.value = res.data[0];
+      userInfo.value = res.data;
     }
   });
 });
+
+function gotoHome() {
+  router.push("/");
+}
+function gotoCreator() {
+  router.push("/creator");
+}
+function gotoUserinfo() {
+  router.push("/userinfo");
+}
+function gotoWrite() {
+  const routeData = router.resolve({
+    path: "/write",
+  });
+  window.open(routeData.href, "_blank");
+}
 </script>
 
 <style scoped>
@@ -204,72 +210,68 @@ header {
   font-size: 16px;
   outline: none;
 }
-.content-create {
-  /* background: #1e80ff; */
-  height: 38px;
-  margin: auto;
-  width: 105px;
-  /* color: #ffffff; */
-}
 
 .content-BellFilled {
   /* font-size: 23px; */
   margin-right: 23px;
 }
 
-/* From uiverse.io by @kirzin */
-button {
-  text-decoration: none;
-  position: absolute;
+/* From uiverse.io by @alexmaracinaru */
+.cta {
+  position: relative;
+  margin: auto;
+  padding: 12px 18px;
+  transition: all 0.2s ease;
   border: none;
-  font-size: 14px;
-  font-family: inherit;
-  color: #fff;
-  width: 8em;
-  height: 2.2em;
-  line-height: 2em;
-  text-align: center;
-  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
-  background-size: 300%;
-  border-radius: 30px;
-  z-index: 1;
+  background: none;
 }
 
-button:hover {
-  animation: ani 8s linear infinite;
-  border: none;
-}
-
-@keyframes ani {
-  0% {
-    background-position: 0%;
-  }
-
-  100% {
-    background-position: 400%;
-  }
-}
-
-button:before {
+.cta:before {
   content: "";
   position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
-  z-index: -1;
-  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
-  background-size: 400%;
-  border-radius: 35px;
-  transition: 1s;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 50px;
+  background: #b1dae7;
+  width: 45px;
+  height: 45px;
+  transition: all 0.3s ease;
 }
 
-button:hover::before {
-  filter: blur(20px);
+.cta span {
+  position: relative;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #234567;
 }
 
-button:active {
-  background: linear-gradient(32deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+.cta svg {
+  position: relative;
+  top: 0;
+  margin-left: 10px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #234567;
+  stroke-width: 2;
+  transform: translateX(-5px);
+  transition: all 0.3s ease;
+}
+
+.cta:hover:before {
+  width: 100%;
+  background: #b1dae7;
+}
+
+.cta:hover svg {
+  transform: translateX(0);
+}
+
+.cta:active {
+  transform: scale(0.95);
 }
 
 .content-login {

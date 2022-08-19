@@ -6,6 +6,6 @@ import { RouterView } from "vue-router";
   <RouterView />
 </template>
 
-<style>
+<style lang="less">
 @import "./assets/css/reset.css";
 </style>

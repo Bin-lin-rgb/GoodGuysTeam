@@ -1,5 +1,6 @@
 <template>
   <CommHeader />
+  <SubHeader />
   <div class="article-list">
     <ul v-infinite-scroll="load" class="infinite-list" style="overflow: auto">
       <router-link
@@ -16,6 +17,7 @@
 
 <script lang="ts" setup>
 import CommHeader from "@/components/common/CommHeader.vue";
+import SubHeader from "@/components/common/SubHeader.vue";
 import { ref } from "vue";
 // import { useRouter } from "vue-router";
 // const router = useRouter();
@@ -31,7 +33,7 @@ const load = () => {
   width: 1000px;
   height: 900px;
   position: fixed;
-  top: 90px;
+  top: 130px;
   left: 12%;
   align-items: center;
   justify-content: center;

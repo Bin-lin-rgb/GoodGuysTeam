@@ -13,7 +13,7 @@ getUserInfo().then((res: any) => {
   console.log(res);
   if (res.code == 1000) {
     ElMessage({
-      message: `Hello,${res.data[0].username}`,
+      message: `Hello,${res.data.username}`,
       type: "success",
     });
   }

@@ -28,6 +28,11 @@ const router = createRouter({
       component: () => import("../views/Creator/WriteArticle.vue"),
     },
     {
+      path: "/success",
+      name: "SuccessPage",
+      component: () => import("../views/Creator/SuccessPage.vue"),
+    },
+    {
       path: "/userinfo",
       name: "UserInfo",
       component: () => import("../views/UserInfo/UserIndex.vue"),

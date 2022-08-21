@@ -37,13 +37,6 @@ type Post struct {
 	Status      int8   `json:"status,omitempty"`                          // 帖子状态
 }
 
-type Community struct {
-	Id            int32  `json:"id,omitempty"`
-	CommunityId   uint64 `json:"community_id,omitempty"`
-	CommunityName string `json:"community_name,omitempty"`
-	Introduction  string `json:"introduction,omitempty"`
-}
-
 // UnmarshalJSON 为Post类型实现自定义的UnmarshalJSON方法
 func (p *Post) UnmarshalJSON(data []byte) (err error) {
 	required := struct {
@@ -66,4 +59,19 @@ func (p *Post) UnmarshalJSON(data []byte) (err error) {
 		p.CommunityId = uint64(required.CommunityID)
 	}
 	return
+}
+
+type Community struct {
+	Id            int32  `json:"id,omitempty"`
+	CommunityId   uint64 `json:"community_id,omitempty"`
+	CommunityName string `json:"community_name,omitempty"`
+	Introduction  string `json:"introduction,omitempty"`
+}
+
+type ApiPostList struct {
+	Title         string `json:"title,omitempty"`          // 标题
+	Content       string `json:"content,omitempty"`        // 内容
+	CommunityName string `json:"community_name,omitempty"` // 嵌入社区分类信息
+	AuthorName    string `json:"author_name"`
+	CreatedAt     string `json:"created_at"`
 }

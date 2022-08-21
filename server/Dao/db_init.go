@@ -17,6 +17,9 @@ type Manager interface {
 	GetCommunityList() ([]Model.Community, error)
 
 	StoreArticle(postInfo Model.Post) error
+	GetList(latestTime int64) ([]Model.Post, error)
+	GetUsernameById(AuthorId uint64) (author string, err error)
+	GetCommunityNameById(CommunityId uint64) (CommunityName string, err error)
 
 	AddComment(comment *Model.Comment)
 }

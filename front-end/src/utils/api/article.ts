@@ -12,6 +12,12 @@ export function GetPostList() {
   });
 }
 
+export function GetPostDetails(data:any) {
+  return request({
+    url: `http://localhost:8080/v1/post/${data.id}`,
+  });
+}
+
 export function GetPostListWithTime(data: any) {
   return request({
     url: `http://localhost:8080/v1/postlist?latest_time=${data.nextTime}`,

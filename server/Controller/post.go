@@ -1,6 +1,7 @@
 package Controller
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"net/http"
@@ -12,8 +13,7 @@ import (
 )
 
 type PostListResponse struct {
-	Code MyCode `json:"code"`
-	//PostList []*Model.ApiPostList `json:"post_list"`
+	Code     MyCode      `json:"code"`
 	Data     interface{} `json:"data,omitempty"`
 	NextTime int64       `json:"next_time,omitempty"`
 }
@@ -75,7 +75,8 @@ func PostList(c *gin.Context) {
 	ListLength := len(list)
 
 	data := make([]*Model.ApiPostList, 0, ListLength)
-	timeLayout := "01-02"
+	timeLayoutDate := "01-02"
+	timeLayoutymdm := "2006-01-02 15:04"
 	for _, post := range list {
 		// 根据作者id查询作者信息
 		authorName, err := Dao.Mgr.GetUsernameById(post.AuthorId)
@@ -96,11 +97,13 @@ func PostList(c *gin.Context) {
 		// 接口数据拼接
 
 		postData := &Model.ApiPostList{
+			PostId:        post.Id,
 			Title:         post.Title,
 			Content:       post.Content,
 			CommunityName: communityName,
 			AuthorName:    authorName,
-			CreatedAt:     post.CreatedAt.Format(timeLayout),
+			CreatedAt:     post.CreatedAt.Format(timeLayoutDate),
+			CreatedAt2:    post.CreatedAt.Format(timeLayoutymdm),
 		}
 		data = append(data, postData)
 	}
@@ -112,5 +115,52 @@ func PostList(c *gin.Context) {
 		Data:     data,
 		NextTime: list[Thelastone].CreatedAt.Unix(),
 	})
-	//ResponseSuccess(c, data)
+}
+
+func PostDetail(c *gin.Context) {
+	// 1、获取参数(从URL中获取帖子的id)
+	postIdStr := c.Param("id")
+	postId, err := strconv.ParseInt(postIdStr, 10, 64)
+	fmt.Println(postId)
+	if err != nil {
+		zap.L().Error("get post detail with invalid param", zap.Error(err))
+		ResponseError(c, CodeInvalidParams)
+	}
+
+	// 2、根据id取出id帖子数据(查数据库)
+	post, err := Dao.Mgr.GetPostById(postId)
+	if err != nil {
+		zap.L().Error("Dao.Mgr.GetPostById failed", zap.Error(err))
+		ResponseError(c, CodeServerBusy)
+	}
+
+	timeLayoutymdm := "2006-01-02 15:04"
+	authorName, err := Dao.Mgr.GetUsernameById(post.AuthorId)
+	if err != nil {
+		zap.L().Error("Dao.Mgr.GetAuthorById() failed",
+			zap.Uint64("postID", post.AuthorId),
+			zap.Error(err))
+	}
+	// 根据社区id查询社区详细信息
+	communityName, err := Dao.Mgr.GetCommunityNameById(post.CommunityId)
+	if err != nil {
+		zap.L().Error("Dao.Mgr.GetCommunityNameById() failed",
+			zap.Uint64("community_id", post.CommunityId),
+			zap.Error(err))
+	}
+	// 接口数据拼接
+
+	postData := &Model.ApiPostList{
+		PostId:        post.Id,
+		Title:         post.Title,
+		Content:       post.Content,
+		CommunityName: communityName,
+		AuthorName:    authorName,
+		CreatedAt2:    post.CreatedAt.Format(timeLayoutymdm),
+	}
+
+	c.JSON(http.StatusOK, PostListResponse{
+		Code: CodeSuccess,
+		Data: postData,
+	})
 }

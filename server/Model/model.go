@@ -69,9 +69,11 @@ type Community struct {
 }
 
 type ApiPostList struct {
+	PostId        int64  `json:"post_id"`
 	Title         string `json:"title,omitempty"`          // 标题
 	Content       string `json:"content,omitempty"`        // 内容
 	CommunityName string `json:"community_name,omitempty"` // 嵌入社区分类信息
 	AuthorName    string `json:"author_name"`
-	CreatedAt     string `json:"created_at"`
+	CreatedAt     string `json:"created_at,omitempty"`
+	CreatedAt2    string `json:"created_at2,omitempty"`
 }

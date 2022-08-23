@@ -18,6 +18,7 @@ type Manager interface {
 
 	StoreArticle(postInfo Model.Post) error
 	GetList(latestTime int64) ([]Model.Post, error)
+	GetPostById(postId int64) (Model.Post, error)
 	GetUsernameById(AuthorId uint64) (author string, err error)
 	GetCommunityNameById(CommunityId uint64) (CommunityName string, err error)
 

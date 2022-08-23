@@ -35,8 +35,12 @@ func (mgr manager) GetList(latestTime int64) ([]Model.Post, error) {
 	return List, result.Error
 }
 
-type UserResult struct {
-	AuthorName string `json:"author_name"`
+func (mgr manager) GetPostById(postId int64) (Model.Post, error) {
+	var postDetail Model.Post
+	if err := mgr.db.Where("id = ?", postId).Find(&postDetail).Error; err != nil {
+		return postDetail, err
+	}
+	return postDetail, nil
 }
 
 func (mgr manager) GetUsernameById(AuthorId uint64) (author string, err error) {
@@ -45,10 +49,6 @@ func (mgr manager) GetUsernameById(AuthorId uint64) (author string, err error) {
 		return "", err
 	}
 	return result.Username, nil
-}
-
-type CommunityResult struct {
-	CommunityName string `json:"community_name"`
 }
 
 func (mgr manager) GetCommunityNameById(CommunityId uint64) (CommunityName string, err error) {

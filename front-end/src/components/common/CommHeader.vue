@@ -140,6 +140,7 @@ header {
   background: white;
   box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.16);
   opacity: 1;
+  z-index: 5;
 }
 
 .header-content {

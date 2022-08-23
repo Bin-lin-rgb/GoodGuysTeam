@@ -33,15 +33,14 @@ func Start(r *gin.Engine) {
 	v1.POST("/user/register", Controller.Register)
 	v1.GET("/community", Controller.GetCommunity) // 获取分类社区列表
 	v1.GET("/refreshToken", Controller.RefreshTokenHandler)
-	v1.GET("/postlist", Controller.PostList) // 根据时间展示的文章列表
+	v1.GET("/postlist", Controller.PostList)   // 根据时间展示的文章列表
+	v1.GET("/post/:id", Controller.PostDetail) // 文章详情
 
 	v1.Use(middlewares.JWTAuthMiddleware())
 
 	{
 		v1.GET("/user", Controller.ListUser)
 		v1.POST("/post", Controller.PostArticle) // 发布文章
-		//v1.GET("/post/:id", Controller.PostDetail) // 文章详情
-
 	}
 
 }

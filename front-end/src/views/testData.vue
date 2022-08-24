@@ -1,9 +1,13 @@
 <template>
   <CommHeader />
   <h1>testData</h1>
-  <ul v-infinite-scroll="load" class="infinite-list" style="overflow: auto">
-    <li v-for="i in count" :key="i" class="infinite-list-item">{{ i }}</li>
-  </ul>
+  <a-space>
+    <a-button type="primary">Primary</a-button>
+    <a-button>Secondary</a-button>
+    <a-button type="dashed">Dashed</a-button>
+    <a-button type="outline">Outline</a-button>
+    <a-button type="text">Text</a-button>
+  </a-space>
 </template>
 
 <script setup lang="ts">
@@ -12,11 +16,8 @@ import CommHeader from "@/components/common/CommHeader.vue";
 import { getUserInfo } from "@/utils/api/login";
 //element
 import { ElMessage } from "element-plus";
-import { ref } from "vue";
-const count = ref(0);
-const load = () => {
-  count.value += 2;
-};
+// import { ref } from "vue";
+
 getUserInfo().then((res: any) => {
   console.log(res);
   if (res.code == 1000) {

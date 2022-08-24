@@ -7,7 +7,13 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AAffix: typeof import('@arco-design/web-vue')['Affix']
+    AAnchor: typeof import('@arco-design/web-vue')['Anchor']
+    AAnchorLink: typeof import('@arco-design/web-vue')['AnchorLink']
+    AButton: typeof import('@arco-design/web-vue')['Button']
     ArticleItem: typeof import('./src/components/common/ArticleItem.vue')['default']
+    ASpace: typeof import('@arco-design/web-vue')['Space']
+    ATag: typeof import('@arco-design/web-vue')['Tag']
     CommHeader: typeof import('./src/components/common/CommHeader.vue')['default']
     ElAffix: typeof import('element-plus/es')['ElAffix']
     ElAside: typeof import('element-plus/es')['ElAside']

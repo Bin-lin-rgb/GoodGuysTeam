@@ -21,8 +21,15 @@
               v-model="text"
               :previewOnly="true"
               class="md"
+              :marked-heading-id="generateId"
               @onGetCatalog="GetCatalog"
             />
+            <a-space
+              >标签 :
+              <a-tag checkable color="arcoblue" :default-checked="true">
+                {{ data.community_name }}</a-tag
+              >
+            </a-space>
           </div>
         </el-main>
         <el-aside width="300px" class="aside">
@@ -35,10 +42,33 @@
               </div>
               <div class="aside-user-name">{{ data.author_name }}</div>
             </div>
-            <el-affix :offset="120">
-              <el-button type="primary">Offset top 120px</el-button>
-              <div class="aside-catalog"></div>
-            </el-affix>
+            <a-affix :offsetTop="80"
+              ><a-anchor>
+                <a-anchor-link
+                  v-for="item in catalog"
+                  :key="item.id"
+                  :href="`#heading-${item.id}`"
+                >
+                  {{ item.text }}
+                  <!-- <template #sublist>
+                    <a-anchor-link
+                      v-for="item in level_2"
+                      :key="item.id"
+                      :href="`#heading-${item.id}`"
+                      >{{ item.text }}
+                      <template #sublist>
+                        <a-anchor-link
+                          v-for="item in level_2"
+                          :key="item.id"
+                          :href="`#heading-${item.id}`"
+                          >{{ item.text }}</a-anchor-link
+                        >
+                      </template></a-anchor-link
+                    >
+                  </template> -->
+                </a-anchor-link>
+              </a-anchor></a-affix
+            >
           </div>
         </el-aside>
       </el-container>
@@ -57,6 +87,7 @@ import "md-editor-v3/lib/style.css";
 import { useRoute } from "vue-router";
 const route = useRoute();
 
+// 加载内容
 const text = ref("Hello Editor!");
 let data = reactive({
   author_name: "ddff",
@@ -70,19 +101,54 @@ const loadBlog = async () => {
   const res = await GetPostDetails({ id: route.query.id });
   data = res.data;
   text.value = res.data.content;
-  console.log(data);
 };
 
 onBeforeMount(() => {
   loadBlog();
 });
 
-const GetCatalog = (h: string) => {
-  console.log(h);
+// 目录相关
+const catalog = ref();
+// const level_1 = ref();
+// const level_2 = ref();
+// const level_3 = ref();
+const generateId = (_text: any, _level: any, index: any) => `heading-${index}`;
+const GetCatalog = (list: []) => {
+  // list 一个对象数组
   // 0: {text: '上手使用', level: 1}
   // 1: {text: '生产环境 Tree Sharking', level: 2}
   // length: 2
+  catalog.value = list;
+  for (let index = 1; index <= catalog.value.length; index++) {
+    // 增加id属性
+    catalog.value[index - 1].id = index;
+    // 根据level分级,只考虑到第三级
+    // switch (catalog.value[index - 1].level) {
+    //   case 1:
+    //     level_1.value = [...level_1.value, ...catalog.value[index - 1]];
+    //     console.log("---", level_1);
+    //     break;
+    //   case 2:
+    //     level_2.value = [...level_2.value, ...catalog.value[index - 1]];
+    //     break;
+    //   case 3:
+    //     level_3.value = [...level_3.value, ...catalog.value[index - 1]];
+    //     break;
+    //   default:
+    //     break;
+    // }
+  }
 };
+
+MdEditor.config({
+  markedRenderer(renderer) {
+    renderer.heading = (text, level, _r, _s, index) => {
+      const id = generateId(text, level, index);
+      return `<h${level} id="${id}">${text}</h${level}>`;
+    };
+    return renderer;
+  },
+});
 </script>
 
 <style scoped lang="less">

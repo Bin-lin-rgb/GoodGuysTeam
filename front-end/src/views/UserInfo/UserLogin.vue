@@ -22,14 +22,10 @@
               ></a>
             </div>
             <div class="qq-login">
-              <a href="/oauth/login/qq" title="QQ登录"
-                ><i class="fa fa-qq"></i
-              ></a>
+              <a href="/oauth/login/qq" title="QQ登录"></a>
             </div>
             <div class="weibo-login">
-              <a href="/oauth/login/weibo" title="微博登录"
-                ><i class="fa fa-weibo"></i
-              ></a>
+              <a href="/oauth/login/weibo" title="微博登录"></a>
             </div>
           </div>
         </div>
@@ -44,9 +40,7 @@
                 :class="current == item.id ? 'actives' : ''"
                 @click="loginChange(item.id)"
               >
-                <a :class="current == item.id ? 'activess' : ''">{{
-                  item.text
-                }}</a>
+                <a :class="current == item.id ? 'activess' : ''">{{ item.text }}</a>
               </li>
             </ul>
             <div class="tab-content">
@@ -96,16 +90,12 @@
 
                     <el-form-item class="login-Verification" prop="captcha">
                       <el-input placeholder="请输入您的手机号" />
-                      <el-button
-                        class="btn btn-primary sendcaptcha"
-                        type="primary"
+                      <el-button class="btn btn-primary sendcaptcha" type="primary"
                         >发送验证码</el-button
                       >
                     </el-form-item>
                     <div class="login-submit">
-                      <el-button
-                        class="btn btn-primary sendcaptcha"
-                        type="primary"
+                      <el-button class="btn btn-primary sendcaptcha" type="primary"
                         >登录</el-button
                       >
                     </div>
@@ -137,7 +127,7 @@ import { ElMessage } from "element-plus";
 // 加密
 import { Encrypt } from "@/utils/aes";
 // store
-import { useUserStore } from "../stores/user";
+import { useUserStore } from "@/stores/user";
 
 const userStore = useUserStore();
 const router = useRouter();
@@ -205,7 +195,10 @@ const userBtnL = (formEl: any) => {
         username: ruleForm.username,
         password: Encrypt(ruleForm.userpwd),
       }).then((res: any) => {
-        console.log(res);
+        // console.log(res);
+        // res.data
+        // "user_id": 138919669049327617,
+        // "username": "ddff",
         if (res.code != 1000) {
           ElMessage({
             message: res.message,
@@ -219,6 +212,8 @@ const userBtnL = (formEl: any) => {
         });
 
         userStore.setToken(res.data.access_token);
+        userStore.setUsername(res.data.username);
+        userStore.setUserId(res.data.user_id);
         router.go(-1);
         // router.push("/test");
       });

@@ -169,3 +169,15 @@
 {"level":"ERROR","time":"2022-08-24T08:59:15.936+0800","caller":"Controller/post.go:126","msg":"get post detail with invalid param","error":"strconv.ParseInt: parsing \"undefined\": invalid syntax"}
 {"level":"ERROR","time":"2022-08-24T14:44:14.842+0800","caller":"Controller/post.go:64","msg":"Get post list detail with invalid param (latestTime) .","error":"strconv.ParseInt: parsing \"\": invalid syntax"}
 {"level":"ERROR","time":"2022-08-24T14:44:22.831+0800","caller":"Controller/post.go:64","msg":"Get post list detail with invalid param (latestTime) .","error":"strconv.ParseInt: parsing \"\": invalid syntax"}
+{"level":"ERROR","time":"2022-08-24T21:32:57.572+0800","caller":"Controller/post.go:64","msg":"Get post list detail with invalid param (latestTime) .","error":"strconv.ParseInt: parsing \"\": invalid syntax"}
+{"level":"ERROR","time":"2022-08-24T21:33:10.012+0800","caller":"Controller/post.go:64","msg":"Get post list detail with invalid param (latestTime) .","error":"strconv.ParseInt: parsing \"undefined\": invalid syntax"}
+{"level":"ERROR","time":"2022-08-24T21:33:11.641+0800","caller":"Controller/post.go:64","msg":"Get post list detail with invalid param (latestTime) .","error":"strconv.ParseInt: parsing \"undefined\": invalid syntax"}
+{"level":"ERROR","time":"2022-08-25T10:10:15.748+0800","caller":"Controller/post.go:64","msg":"Get post list detail with invalid param (latestTime) .","error":"strconv.ParseInt: parsing \"\": invalid syntax"}
+{"level":"ERROR","time":"2022-08-25T10:10:23.325+0800","caller":"Controller/post.go:64","msg":"Get post list detail with invalid param (latestTime) .","error":"strconv.ParseInt: parsing \"\": invalid syntax"}
+{"level":"ERROR","time":"2022-08-25T10:10:27.465+0800","caller":"Controller/post.go:64","msg":"Get post list detail with invalid param (latestTime) .","error":"strconv.ParseInt: parsing \"\": invalid syntax"}
+{"level":"ERROR","time":"2022-08-25T13:08:46.418+0800","caller":"Controller/post.go:64","msg":"Get post list detail with invalid param (latestTime) .","error":"strconv.ParseInt: parsing \"\": invalid syntax"}
+{"level":"ERROR","time":"2022-08-25T14:19:12.433+0800","caller":"Controller/post.go:64","msg":"Get post list detail with invalid param (latestTime) .","error":"strconv.ParseInt: parsing \"\": invalid syntax"}
+{"level":"ERROR","time":"2022-08-25T14:59:39.808+0800","caller":"Controller/post.go:64","msg":"Get post list detail with invalid param (latestTime) .","error":"strconv.ParseInt: parsing \"\": invalid syntax"}
+{"level":"ERROR","time":"2022-08-25T15:00:36.145+0800","caller":"Controller/post.go:64","msg":"Get post list detail with invalid param (latestTime) .","error":"strconv.ParseInt: parsing \"\": invalid syntax"}
+{"level":"ERROR","time":"2022-08-25T15:00:46.552+0800","caller":"Controller/post.go:64","msg":"Get post list detail with invalid param (latestTime) .","error":"strconv.ParseInt: parsing \"\": invalid syntax"}
+{"level":"ERROR","time":"2022-08-25T15:02:17.478+0800","caller":"Controller/post.go:64","msg":"Get post list detail with invalid param (latestTime) .","error":"strconv.ParseInt: parsing \"\": invalid syntax"}

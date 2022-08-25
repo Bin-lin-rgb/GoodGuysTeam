@@ -42,15 +42,17 @@
               </div>
               <div class="aside-user-name">{{ data.author_name }}</div>
             </div>
-            <a-affix :offsetTop="80"
-              ><a-anchor>
-                <a-anchor-link
-                  v-for="item in catalog"
-                  :key="item.id"
-                  :href="`#heading-${item.id}`"
-                >
-                  {{ item.text }}
-                  <!-- <template #sublist>
+            <el-divider />
+            <div class="catalog">
+              <a-affix :offsetTop="90" class="a-affix">
+                <a-anchor class="a-anchor">
+                  <a-anchor-link
+                    v-for="item in catalog"
+                    :key="item.id"
+                    :href="`#heading-${item.id}`"
+                  >
+                    {{ item.text }}
+                    <!-- <template #sublist>
                     <a-anchor-link
                       v-for="item in level_2"
                       :key="item.id"
@@ -66,9 +68,10 @@
                       </template></a-anchor-link
                     >
                   </template> -->
-                </a-anchor-link>
-              </a-anchor></a-affix
-            >
+                  </a-anchor-link>
+                </a-anchor></a-affix
+              >
+            </div>
           </div>
         </el-aside>
       </el-container>
@@ -192,17 +195,27 @@ MdEditor.config({
 
         .aside-wrap {
           padding: 10px;
-          background: rgb(255, 255, 255);
+
           .aside-user-bar {
+            background: rgb(255, 255, 255);
             margin: 0 auto;
             text-align: center;
             .aside-avatar {
-              // width: 100%;
-              margin-top: 2rem;
+              padding-top: 2rem;
+              padding-bottom: 2rem;
             }
 
             .aside-user-name {
-              margin-bottom: 2rem;
+              padding-bottom: 2rem;
+            }
+          }
+
+          .catalog {
+            .a-affix {
+              .a-anchor {
+                background: rgb(255, 255, 255);
+                width: 250px;
+              }
             }
           }
         }

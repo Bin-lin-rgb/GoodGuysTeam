@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/HomeIndex.vue";
+import Home from "@/views/Home/HomeIndex.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,12 +15,22 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/UserLogin.vue"),
+      component: () => import("@/views/UserInfo/UserLogin.vue"),
     },
     {
       path: "/creator",
       name: "Creator",
       component: () => import("../views/Creator/CreatorIndex.vue"),
+      children: [
+        {
+          path: "list",
+          component: () => import("../views/Creator/ShowArticle.vue"),
+        },
+        {
+          path: "index",
+          component: () => import("../views/Creator/RightIndex.vue"),
+        },
+      ],
     },
     {
       path: "/write",
@@ -45,7 +55,7 @@ const router = createRouter({
     {
       path: "/test",
       name: "Test",
-      component: () => import("../views/testData.vue"),
+      component: () => import("@/components/testData.vue"),
     },
   ],
 });

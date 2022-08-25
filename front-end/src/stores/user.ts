@@ -5,6 +5,8 @@ export const useUserStore = defineStore({
   state: () => {
     return {
       token: "",
+      username: "",
+      user_id: "",
     };
   },
   actions: {
@@ -13,7 +15,15 @@ export const useUserStore = defineStore({
     },
     clearToken() {
       this.token = "";
-    }
+      this.user_id = "";
+      this.username = "";
+    },
+    setUsername(name: any) {
+      this.username = name;
+    },
+    setUserId(id: any) {
+      this.user_id = id;
+    },
   },
   // 开启数据缓存
   persist: {

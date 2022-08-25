@@ -58,3 +58,11 @@ func (mgr manager) GetCommunityNameById(CommunityId uint64) (CommunityName strin
 	}
 	return result.CommunityName, nil
 }
+
+func (mgr manager) GetPostListByUserId(userId uint64) ([]Model.Post, error) {
+	var postLists []Model.Post
+	if err := mgr.db.Where("author_id = ?", userId).Find(&postLists).Error; err != nil {
+		return postLists, err
+	}
+	return postLists, nil
+}

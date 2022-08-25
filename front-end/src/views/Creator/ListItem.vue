@@ -1,7 +1,7 @@
 <template>
   <div class="info-main">
     <div class="main-title">{{ articleListItem.title }}</div>
-    <div class="main-info">{{ articleListItem.created_at }}</div>
+    <div class="main-info">{{ articleListItem.created_at2 }}</div>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ defineProps<{
   padding: 10px;
   border-bottom: solid #e5e6eb 1px;
   .main-title {
-    font-size: 25px;
+    font-size: 22px;
   }
 }
 </style>

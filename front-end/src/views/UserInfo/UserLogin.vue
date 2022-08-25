@@ -116,7 +116,7 @@
 
 <script setup lang="ts">
 // vue
-import { reactive, ref } from "vue";
+import { reactive, ref, onBeforeUnmount } from "vue";
 // api
 import { login, register } from "@/utils/api/login";
 // router
@@ -186,6 +186,7 @@ const userBtnR = (formEl: any) => {
     }
   });
 };
+let timer: any;
 //账号密码点击登录
 const userBtnL = (formEl: any) => {
   if (!formEl) return;
@@ -197,7 +198,6 @@ const userBtnL = (formEl: any) => {
       }).then((res: any) => {
         // console.log(res);
         // res.data
-        // "user_id": 138919669049327617,
         // "username": "ddff",
         if (res.code != 1000) {
           ElMessage({
@@ -213,15 +213,20 @@ const userBtnL = (formEl: any) => {
 
         userStore.setToken(res.data.access_token);
         userStore.setUsername(res.data.username);
-        userStore.setUserId(res.data.user_id);
-        router.go(-1);
-        // router.push("/test");
+
+        // 必须延缓一段时间，避免持久化存储失败！
+        timer = setTimeout(() => {
+          router.go(-1);
+        }, 1000);
       });
     } else {
       console.log("error submit!", fields, valid);
     }
   });
 };
+onBeforeUnmount(() => {
+  clearTimeout(timer);
+});
 </script>
 
 <style scoped>

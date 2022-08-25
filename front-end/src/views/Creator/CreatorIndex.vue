@@ -12,7 +12,6 @@
             </div>
             <div class="userinfo-box">
               <div class="user-name">
-                <!-- {{ data.author_name }} -->
                 {{ userStore.username }}
               </div>
             </div>
@@ -56,7 +55,9 @@
                 <el-icon><Collection /></el-icon>
                 <span>内容管理</span>
               </template>
-              <el-menu-item index="2-1" @click="GotoArticleList">文章管理</el-menu-item>
+              <el-menu-item index="2-1" @click="GotoArticleList"
+                >文章管理</el-menu-item
+              >
               <el-menu-item index="2-2">专栏管理</el-menu-item>
               <el-menu-item index="2-3">沸点管理</el-menu-item>
             </el-sub-menu>

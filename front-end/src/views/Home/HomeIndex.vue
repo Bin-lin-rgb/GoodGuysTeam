@@ -56,7 +56,6 @@ const articleList = ref();
 const nextTime = ref();
 // 监听页面滚动到底，是时候加载数据了
 const load = () => {
-  console.log("是时候加载数据了");
   GetPostListWithTime({ nextTime: nextTime.value }).then((res: any) => {
     console.log(res);
     if (res.code != 1000) {

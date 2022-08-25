@@ -57,8 +57,6 @@ func PostArticle(c *gin.Context) {
 func PostList(c *gin.Context) {
 	latestTimeString := c.Query("latest_time")
 
-	//latestTime := time.Now().Unix()
-
 	latestTime, err := strconv.ParseInt(latestTimeString, 10, 64)
 	if err != nil {
 		zap.L().Error("Get post list detail with invalid param (latestTime) .", zap.Error(err))
@@ -121,7 +119,6 @@ func PostDetail(c *gin.Context) {
 	// 1、获取参数(从URL中获取帖子的id)
 	postIdStr := c.Param("id")
 	postId, err := strconv.ParseInt(postIdStr, 10, 64)
-	fmt.Println(postId)
 	if err != nil {
 		zap.L().Error("get post detail with invalid param", zap.Error(err))
 		ResponseError(c, CodeInvalidParams)
@@ -162,5 +159,39 @@ func PostDetail(c *gin.Context) {
 	c.JSON(http.StatusOK, PostListResponse{
 		Code: CodeSuccess,
 		Data: postData,
+	})
+}
+
+func UserBlogList(c *gin.Context) {
+	// 1、获取当前请求的UserID(从c取到当前发请求的用户ID)
+	userId, err := GetCurrentUserID(c)
+	fmt.Println(userId)
+	if err != nil {
+		zap.L().Error("GetCurrentUserID failed", zap.Error(err))
+		ResponseError(c, CodeInvalidParams)
+	}
+
+	// 2、根据id取出id帖子数据(查数据库)
+	postList, err := Dao.Mgr.GetPostListByUserId(userId)
+	if err != nil {
+		zap.L().Error("Dao.Mgr.GetPostListByUserId(userId)", zap.Error(err))
+		ResponseError(c, CodeServerBusy)
+	}
+
+	data := make([]*Model.ApiPostList, 0, len(postList))
+	timeLayoutymdm := "2006-01-02 15:04"
+
+	for _, post := range postList {
+		postData := &Model.ApiPostList{
+			Title:      post.Title,
+			Content:    post.Content,
+			CreatedAt2: post.CreatedAt.Format(timeLayoutymdm),
+		}
+		data = append(data, postData)
+	}
+
+	c.JSON(http.StatusOK, PostListResponse{
+		Code: CodeSuccess,
+		Data: data,
 	})
 }

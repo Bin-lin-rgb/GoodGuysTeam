@@ -13,6 +13,7 @@ type Manager interface {
 	Register(userinfo Model.User) error
 	GetUser(userId uint64) (Model.User, error)
 	IsExist(username string) (Model.User, error)
+	GetPostListByUserId(userId uint64) ([]Model.Post, error)
 
 	GetCommunityList() ([]Model.Community, error)
 

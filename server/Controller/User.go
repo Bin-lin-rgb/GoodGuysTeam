@@ -99,7 +99,7 @@ func Login(c *gin.Context) {
 	}
 }
 
-func ListUser(c *gin.Context) {
+func UserInfo(c *gin.Context) {
 	// 获取当前请求的UserID(从c取到当前发请求的用户ID)
 	userID, err := GetCurrentUserID(c)
 	if err != nil {

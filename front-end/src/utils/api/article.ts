@@ -31,3 +31,9 @@ export function PostArticle(data: any) {
     data: data,
   });
 }
+
+export function GetPostListByUserId() {
+  return request({
+    url: `http://localhost:8080/v1/user/bloglist`,
+  });
+}

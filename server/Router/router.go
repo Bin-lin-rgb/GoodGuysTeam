@@ -39,8 +39,10 @@ func Start(r *gin.Engine) {
 	v1.Use(middlewares.JWTAuthMiddleware())
 
 	{
-		v1.GET("/user", Controller.ListUser)
+		v1.GET("/user", Controller.UserInfo)
 		v1.POST("/post", Controller.PostArticle) // 发布文章
+
+		v1.GET("/user/bloglist", Controller.UserBlogList) // 通过userID查询文章详情
 	}
 
 }

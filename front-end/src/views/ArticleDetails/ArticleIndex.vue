@@ -5,7 +5,7 @@
       <el-container class="container">
         <el-main class="main">
           <div class="main-wrap">
-            <h1 class="title">title</h1>
+            <h1 class="title">{{ data.title }}</h1>
             <div class="userinfo-bar">
               <div class="avatar">
                 <el-avatar
@@ -20,7 +20,6 @@
             <md-editor
               v-model="text"
               :previewOnly="true"
-              class="md"
               :marked-heading-id="generateId"
               @onGetCatalog="GetCatalog"
             />

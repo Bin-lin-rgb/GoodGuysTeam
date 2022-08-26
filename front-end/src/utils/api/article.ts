@@ -20,7 +20,7 @@ export function GetPostDetails(data:any) {
 
 export function GetPostListWithTime(data: any) {
   return request({
-    url: `http://localhost:8080/v1/postlist?latest_time=${data.nextTime}`,
+    url: `http://localhost:8080/v1/postlist/${data.nextTime}`,
   });
 }
 
@@ -35,5 +35,12 @@ export function PostArticle(data: any) {
 export function GetPostListByUserId() {
   return request({
     url: `http://localhost:8080/v1/user/bloglist`,
+  });
+}
+
+export function DeleteBlog(data:any) {
+  return request({
+    url: `http://localhost:8080/v1/user/delete/${data.id}`,
+    method: "delete",
   });
 }

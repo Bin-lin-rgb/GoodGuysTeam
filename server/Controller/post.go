@@ -9,7 +9,6 @@ import (
 	"server/Model"
 	"server/pkg/snowflake"
 	"strconv"
-	"time"
 )
 
 type PostListResponse struct {
@@ -55,13 +54,12 @@ func PostArticle(c *gin.Context) {
 }
 
 func PostList(c *gin.Context) {
-	latestTimeString := c.Query("latest_time")
+	latestTimeString := c.Param("time")
 
 	latestTime, err := strconv.ParseInt(latestTimeString, 10, 64)
 	if err != nil {
-		zap.L().Error("Get post list detail with invalid param (latestTime) .", zap.Error(err))
-		//ResponseError(c, CodeInvalidParams)
-		latestTime = time.Now().Unix()
+		//latestTime = time.Now().Unix()
+		zap.L().Error("latestTime, err := strconv.ParseInt failed.", zap.Error(err))
 	}
 
 	list, err := Dao.Mgr.GetList(latestTime)
@@ -183,6 +181,7 @@ func UserBlogList(c *gin.Context) {
 
 	for _, post := range postList {
 		postData := &Model.ApiPostList{
+			PostId:     post.Id,
 			Title:      post.Title,
 			Content:    post.Content,
 			CreatedAt2: post.CreatedAt.Format(timeLayoutymdm),
@@ -194,4 +193,25 @@ func UserBlogList(c *gin.Context) {
 		Code: CodeSuccess,
 		Data: data,
 	})
+}
+
+func DeleteBlog(c *gin.Context) {
+	// 1、获取参数(从URL中获取帖子的id)
+	postIdStr := c.Param("id")
+	postId, err := strconv.ParseInt(postIdStr, 10, 64)
+	if err != nil {
+		zap.L().Error("get post detail with invalid param", zap.Error(err))
+		ResponseError(c, CodeInvalidParams)
+	}
+	// 2、根据id删除id帖子数据
+	if err := Dao.Mgr.DeletePostById(postId); err != nil {
+		zap.L().Error("Dao.Mgr.DeletePostById failed", zap.Error(err))
+		ResponseError(c, CodeServerBusy)
+	}
+
+	c.JSON(http.StatusOK, Response{
+		Code:    CodeDeleteSuccess,
+		Message: CodeDeleteSuccess.Msg(),
+	})
+
 }

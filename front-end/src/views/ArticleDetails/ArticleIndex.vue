@@ -91,7 +91,7 @@ const route = useRoute();
 
 // 加载内容
 const text = ref("Hello Editor!");
-let data = reactive({
+const data = reactive({
   author_name: "ddff",
   community_name: "Android",
   content: "content test content",
@@ -101,9 +101,13 @@ let data = reactive({
 
 const loadBlog = async () => {
   const res = await GetPostDetails({ id: route.query.id });
-  data = res.data;
+  data.title = res.data.title;
+  data.author_name = res.data.author_name;
+  data.content = res.data.content;
+  data.created_at2 = res.data.created_at2;
   text.value = res.data.content;
 };
+
 
 onBeforeMount(() => {
   loadBlog();
@@ -165,7 +169,7 @@ MdEditor.config({
           padding: 32px;
           background: rgb(255, 255, 255);
           .title {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
           }

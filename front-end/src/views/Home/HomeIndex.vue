@@ -72,7 +72,9 @@ const load = () => {
 };
 
 onBeforeMount(() => {
-  GetPostList().then((res: any) => {
+  // 获取当前时间戳
+  nextTime.value = new Date().getTime();
+  GetPostListWithTime({ nextTime: nextTime.value }).then((res: any) => {
     console.log(res);
     if (res.code != 1000) {
       ElMessage({
@@ -99,12 +101,13 @@ onBeforeMount(() => {
       padding: 10px;
       .list-wrap {
         background: rgb(255, 255, 255);
-        height: 700px;
+        height: 600px;
         .item {
           height: 125px;
           border-bottom: solid 1px #dcdfe6;
           padding: 10px;
           box-sizing: border-box;
+          cursor: pointer;
           .info-bar {
             height: 30px;
             display: inline-block;
@@ -134,6 +137,10 @@ onBeforeMount(() => {
               text-overflow: ellipsis;
             }
           }
+        }
+
+        .item:hover {
+          background-color: #fafafa;
         }
       }
     }

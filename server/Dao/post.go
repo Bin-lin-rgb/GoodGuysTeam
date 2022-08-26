@@ -66,3 +66,11 @@ func (mgr manager) GetPostListByUserId(userId uint64) ([]Model.Post, error) {
 	}
 	return postLists, nil
 }
+
+func (mgr manager) DeletePostById(postId int64) error {
+	var post Model.Post
+	if err := mgr.db.Where("id = ?", postId).Delete(&post).Error; err != nil {
+		return err
+	}
+	return nil
+}

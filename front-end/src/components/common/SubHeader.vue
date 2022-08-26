@@ -54,7 +54,7 @@ onBeforeMount(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 6;
+  z-index: 101;
   .el-menu-demo {
     border-top: solid 1px #dcdfe6;
     border-bottom: solid 1px #dcdfe6;

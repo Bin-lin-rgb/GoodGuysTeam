@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
     AAnchor: typeof import('@arco-design/web-vue')['Anchor']
     AAnchorLink: typeof import('@arco-design/web-vue')['AnchorLink']
     AButton: typeof import('@arco-design/web-vue')['Button']
+    AEmpty: typeof import('@arco-design/web-vue')['Empty']
     ArticleItem: typeof import('./src/components/common/ArticleItem.vue')['default']
     ASpace: typeof import('@arco-design/web-vue')['Space']
     ATag: typeof import('@arco-design/web-vue')['Tag']

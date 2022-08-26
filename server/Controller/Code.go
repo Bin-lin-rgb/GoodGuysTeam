@@ -16,6 +16,7 @@ const (
 	CodeNotLogin          MyCode = 1008
 	CodeSQLError          MyCode = 1009
 	CodeRefreshTokenError MyCode = 1010
+	CodeDeleteSuccess     MyCode = 1011
 )
 
 var msgFlags = map[MyCode]string{
@@ -30,6 +31,7 @@ var msgFlags = map[MyCode]string{
 	CodeNotLogin:          "未登录",
 	CodeSQLError:          "数据错误",
 	CodeRefreshTokenError: "token刷新失败",
+	CodeDeleteSuccess:     "删除成功",
 }
 
 func (c MyCode) Msg() string {

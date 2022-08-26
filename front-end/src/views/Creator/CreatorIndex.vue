@@ -119,7 +119,7 @@ onMounted(() => {
 
 <style scoped lang="less">
 .common-layout {
-  margin-top: 120px !important;
+  margin-top: 80px !important;
   // z-index: 6;
   // position: fixed;
   // top: 85px;

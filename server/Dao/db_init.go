@@ -22,6 +22,7 @@ type Manager interface {
 	GetPostById(postId int64) (Model.Post, error)
 	GetUsernameById(AuthorId uint64) (author string, err error)
 	GetCommunityNameById(CommunityId uint64) (CommunityName string, err error)
+	DeletePostById(postId int64) error
 
 	AddComment(comment *Model.Comment)
 }

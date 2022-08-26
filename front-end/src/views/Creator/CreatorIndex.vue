@@ -2,75 +2,77 @@
   <SimpleHeader />
   <div class="common-layout">
     <el-container class="container">
-      <el-aside width="260px" class="aside"
-        ><div class="aside-wrap">
-          <div class="user-buttom-bar">
-            <div class="avatar">
-              <el-avatar
-                src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-              />
-            </div>
-            <div class="userinfo-box">
-              <div class="user-name">
-                {{ userStore.username }}
+      <a-affix :offsetTop="80">
+        <el-aside width="260px" class="aside"
+          ><div class="aside-wrap">
+            <div class="user-buttom-bar">
+              <div class="avatar">
+                <el-avatar
+                  src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                />
+              </div>
+              <div class="userinfo-box">
+                <div class="user-name">
+                  {{ userStore.username }}
+                </div>
+              </div>
+              <el-divider />
+              <div class="buttom-write">
+                <button @click="GotoWrite">
+                  <div class="svg-wrapper-1">
+                    <div class="svg-wrapper">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        height="24"
+                      >
+                        <path fill="none" d="M0 0h24v24H0z"></path>
+                        <path
+                          fill="currentColor"
+                          d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <span>写文章</span>
+                </button>
               </div>
             </div>
-            <el-divider />
-            <div class="buttom-write">
-              <button @click="GotoWrite">
-                <div class="svg-wrapper-1">
-                  <div class="svg-wrapper">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      width="24"
-                      height="24"
-                    >
-                      <path fill="none" d="M0 0h24v24H0z"></path>
-                      <path
-                        fill="currentColor"
-                        d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
-                      ></path>
-                    </svg>
-                  </div>
-                </div>
-                <span>写文章</span>
-              </button>
-            </div>
-          </div>
 
-          <el-menu
-            default-active="2-1"
-            class="el-menu-vertical-demo aside-menu"
-            @open="handleOpen"
-            @close="handleClose"
-            @select="handleSelect"
-          >
-            <el-menu-item index="1" @click="GotoIndex">
-              <el-icon><House /></el-icon>
-              <span>首页</span>
-            </el-menu-item>
-            <el-sub-menu index="2">
-              <template #title>
-                <el-icon><Collection /></el-icon>
-                <span>内容管理</span>
-              </template>
-              <el-menu-item index="2-1" @click="GotoArticleList"
-                >文章管理</el-menu-item
-              >
-              <el-menu-item index="2-2">专栏管理</el-menu-item>
-              <el-menu-item index="2-3">沸点管理</el-menu-item>
-            </el-sub-menu>
-            <el-sub-menu index="3">
-              <template #title>
-                <el-icon><Histogram /></el-icon>
-                <span>数据中心</span>
-              </template>
-              <el-menu-item index="3-1">内容数据</el-menu-item>
-            </el-sub-menu>
-          </el-menu>
-        </div>
-      </el-aside>
+            <el-menu
+              default-active="2-1"
+              class="el-menu-vertical-demo aside-menu"
+              @open="handleOpen"
+              @close="handleClose"
+              @select="handleSelect"
+            >
+              <el-menu-item index="1" @click="GotoIndex">
+                <el-icon><House /></el-icon>
+                <span>首页</span>
+              </el-menu-item>
+              <el-sub-menu index="2">
+                <template #title>
+                  <el-icon><Collection /></el-icon>
+                  <span>内容管理</span>
+                </template>
+                <el-menu-item index="2-1" @click="GotoArticleList"
+                  >文章管理</el-menu-item
+                >
+                <el-menu-item index="2-2">专栏管理</el-menu-item>
+                <el-menu-item index="2-3">沸点管理</el-menu-item>
+              </el-sub-menu>
+              <el-sub-menu index="3">
+                <template #title>
+                  <el-icon><Histogram /></el-icon>
+                  <span>数据中心</span>
+                </template>
+                <el-menu-item index="3-1">内容数据</el-menu-item>
+              </el-sub-menu>
+            </el-menu>
+          </div>
+        </el-aside>
+      </a-affix>
       <el-main class="main">
         <div class="main-warp">
           <router-view></router-view>
@@ -117,10 +119,11 @@ onMounted(() => {
 
 <style scoped lang="less">
 .common-layout {
-  // margin-top: 80px !important;
-  position: fixed;
-  top: 85px;
-  left: 10%;
+  margin-top: 120px !important;
+  // z-index: 6;
+  // position: fixed;
+  // top: 85px;
+  // left: 10%;
   .container {
     width: 1280px;
     .aside {

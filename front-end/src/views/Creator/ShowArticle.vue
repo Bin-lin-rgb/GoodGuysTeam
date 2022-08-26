@@ -8,30 +8,24 @@
     <el-menu-item index="1">文章</el-menu-item>
     <el-menu-item index="2">草稿箱</el-menu-item>
   </el-menu>
-  <div class="common-layout">
-    <el-container>
-      <el-main>
-        <div class="count-bar">
-          <el-tabs
-            type="border-card"
-            v-model="activeName"
-            class="tabs"
-            @tab-click="handleClick"
-          >
-            <el-tab-pane label="全部" class="tab-all">
-              <ListItem
-                v-for="item in articleList"
-                :key="item.id"
-                :articleListItem="item"
-              />
-            </el-tab-pane>
-            <el-tab-pane label="发布">发布</el-tab-pane>
-            <el-tab-pane label="审核中（0）">审核中（0）</el-tab-pane>
-            <el-tab-pane label="未通过（0）">未通过（0）</el-tab-pane>
-          </el-tabs>
-        </div>
-      </el-main>
-    </el-container>
+  <div class="count-bar">
+    <el-tabs
+      type="border-card"
+      v-model="activeName"
+      class="tabs"
+      @tab-click="handleClick"
+    >
+      <el-tab-pane label="全部" class="tab-all">
+        <ListItem
+          v-for="item in articleList"
+          :key="item.id"
+          :articleListItem="item"
+        />
+      </el-tab-pane>
+      <el-tab-pane label="发布">发布</el-tab-pane>
+      <el-tab-pane label="审核中（0）">审核中（0）</el-tab-pane>
+      <el-tab-pane label="未通过（0）">未通过（0）</el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
@@ -70,7 +64,8 @@ onBeforeMount(() => {
   display: flex;
   .tabs {
     width: 100%;
-    // height: 500px;
+    height: 90%;
+    overflow: hidden;
     .tab-all {
       overflow: auto;
     }

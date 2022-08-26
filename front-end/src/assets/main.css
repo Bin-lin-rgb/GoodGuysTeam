@@ -26,11 +26,12 @@ a,
     display: flex;
     place-items: center;
     background: #f4f5f5;
+    max-height: 900px;
+    overflow: auto;
   }
 
   #app {
     display: flex;
-    grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
   }
 }

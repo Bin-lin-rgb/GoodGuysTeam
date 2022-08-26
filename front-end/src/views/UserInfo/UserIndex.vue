@@ -9,25 +9,16 @@
             <el-avatar :size="90" :src="circleUrl" />
             <el-row class="info-box" type="flex">
               <el-col>
-                <div>
-                  获取用户昵称
-                </div>
-                <div>
-                  职业，此处有跳转
-                </div>
-                <div>
-                  格言，此处有跳转
-                </div>
+                <div>{{ userStore.username }}</div>
               </el-col>
             </el-row>
             <div class="action-box">
               <el-row>
                 <el-col>
-                  <div class="login-box">
-                    其他方式登录
-                  </div>
                   <div>
-                     <el-button type="primary" plain @click="edit('edit')">编辑个人资料</el-button>
+                    <el-button type="primary" plain @click="edit('edit')"
+                      >编辑个人资料</el-button
+                    >
                   </div>
                 </el-col>
               </el-row>
@@ -52,7 +43,7 @@
         </div>
         <div class="list-block">
           <div class="list-header">
-            <el-menu default-active="1" class="el-menu-demo" mode="horizontal">
+            <el-menu default-active="2" class="el-menu-demo" mode="horizontal">
               <el-menu-item index="1">动态</el-menu-item>
               <el-menu-item index="2">文章</el-menu-item>
               <el-menu-item index="3">专栏</el-menu-item>
@@ -66,25 +57,25 @@
         </div>
       </div>
     </el-menu>
-
   </div>
-</template> 
+</template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import { reactive, toRefs } from 'vue';
+import { useRouter } from "vue-router";
+import { reactive, toRefs } from "vue";
+import { useUserStore } from "@/stores/user";
+import { ArrowRight } from "@element-plus/icons-vue";
+const userStore = useUserStore();
+const router = useRouter();
 
 const state = reactive({
   circleUrl:
-    'https://p6-passport.byteacctimg.com/img/mosaic-legacy/3791/5070639578~300x300.image',
-})
+    "https://p6-passport.byteacctimg.com/img/mosaic-legacy/3791/5070639578~300x300.image",
+});
 
-const { circleUrl } = toRefs(state)
+const { circleUrl } = toRefs(state);
 
-const router = useRouter()
-
-const edit = (name: string) => router.push({ name })
-
+const edit = (name: string) => router.push({ name });
 </script>
 
 <style scoped>
@@ -98,7 +89,6 @@ const edit = (name: string) => router.push({ name })
   align-items: center;
   justify-content: center;
   border-radius: 20px;
-
 }
 
 .major-area {
@@ -137,7 +127,6 @@ const edit = (name: string) => router.push({ name })
   width: 708px;
   height: 52px;
   position: relative;
-
 }
 
 .badge-left {
@@ -147,7 +136,7 @@ const edit = (name: string) => router.push({ name })
 }
 
 .badge-img {
-  background-image: url('https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/badge-count-icon.0586ac4.png');
+  background-image: url("https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/badge-count-icon.0586ac4.png");
   background-size: contain;
   width: 20px;
   height: 20px;

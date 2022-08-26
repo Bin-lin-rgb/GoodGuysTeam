@@ -261,3 +261,6 @@
 {"level":"ERROR","time":"2022-08-26T14:39:30.698+0800","caller":"Controller/post.go:62","msg":"latestTime, err := strconv.ParseInt failed.","error":"strconv.ParseInt: parsing \"undefined\": invalid syntax"}
 {"level":"ERROR","time":"2022-08-26T14:39:30.898+0800","caller":"Controller/post.go:62","msg":"latestTime, err := strconv.ParseInt failed.","error":"strconv.ParseInt: parsing \"undefined\": invalid syntax"}
 {"level":"ERROR","time":"2022-08-26T14:39:40.484+0800","caller":"Controller/post.go:67","msg":"Dao.Mgr.GetList(latestTime) failed.","error":"Author: unsupported relations for schema Post"}
+{"level":"ERROR","time":"2022-08-26T14:51:23.370+0800","caller":"Controller/post.go:67","msg":"Dao.Mgr.GetList(latestTime) failed.","error":"Author: unsupported relations for schema Post"}
+{"level":"ERROR","time":"2022-08-26T14:57:31.453+0800","caller":"Controller/post.go:67","msg":"Dao.Mgr.GetList(latestTime) failed.","error":"Author: unsupported relations for schema Post"}
+{"level":"ERROR","time":"2022-08-26T15:02:37.471+0800","caller":"Controller/post.go:67","msg":"Dao.Mgr.GetList(latestTime) failed.","error":"Author: unsupported relations for schema Post"}

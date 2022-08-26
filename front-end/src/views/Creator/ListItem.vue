@@ -54,7 +54,7 @@ const Delete = async () => {
   .title-time {
     display: inline-block;
     .main-title {
-      font-size: 22px;
+      font-size: 20px;
       width: 750px;
       height: 30px;
       overflow: hidden;

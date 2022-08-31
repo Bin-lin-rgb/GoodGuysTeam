@@ -1,6 +1,5 @@
 <template>
   <CommHeader />
-
   <div class="common-layout">
     <el-menu>
       <div class="major-area">
@@ -9,14 +8,14 @@
             <el-avatar :size="90" :src="circleUrl" />
             <el-row class="info-box" type="flex">
               <el-col>
-                <div>{{ userStore.username }}</div>
+                <div>{{ userinfo.username }}</div>
               </el-col>
             </el-row>
             <div class="action-box">
               <el-row>
                 <el-col>
                   <div>
-                    <el-button type="primary" plain @click="edit('edit')"
+                    <el-button type="primary" plain @click="GotoEdit"
                       >编辑个人资料</el-button
                     >
                   </div>
@@ -45,7 +44,9 @@
           <div class="list-header">
             <el-menu default-active="2" class="el-menu-demo" mode="horizontal">
               <el-menu-item index="1">动态</el-menu-item>
-              <el-menu-item index="2">文章</el-menu-item>
+              <el-menu-item index="2" @click="GotoArticleList"
+                >文章</el-menu-item
+              >
               <el-menu-item index="3">专栏</el-menu-item>
               <el-menu-item index="4">沸点</el-menu-item>
               <el-menu-item index="5">收藏集</el-menu-item>
@@ -53,7 +54,9 @@
               <el-menu-item index="7">赞</el-menu-item>
             </el-menu>
           </div>
-          <div class="list-body"></div>
+          <div class="list-body">
+            <!-- <vue-router></vue-router> -->
+          </div>
         </div>
       </div>
     </el-menu>
@@ -62,10 +65,9 @@
 
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import { reactive, toRefs } from "vue";
-import { useUserStore } from "@/stores/user";
+import { ref, reactive, toRefs, onBeforeMount } from "vue";
 import { ArrowRight } from "@element-plus/icons-vue";
-const userStore = useUserStore();
+import { getUserInfo } from "@/utils/api/login";
 const router = useRouter();
 
 const state = reactive({
@@ -75,7 +77,29 @@ const state = reactive({
 
 const { circleUrl } = toRefs(state);
 
-const edit = (name: string) => router.push({ name });
+function GotoEdit() {
+  router.push("/userinfo/setting");
+}
+
+function GotoArticleList() {
+  router.push("/userinfo/list");
+}
+
+const userinfo = ref({
+  username: "",
+});
+const loadUserInfo = async () => {
+  const res: any = await getUserInfo();
+  if (res.code === 1000) {
+    userinfo.value = res.data;
+  } else {
+    return;
+  }
+};
+
+onBeforeMount(() => {
+  loadUserInfo();
+});
 </script>
 
 <style scoped>

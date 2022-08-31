@@ -46,6 +46,27 @@ const router = createRouter({
       path: "/userinfo",
       name: "UserInfo",
       component: () => import("../views/UserInfo/UserIndex.vue"),
+      children: [
+        {
+          path: "list",
+          component: () => import("../views/UserInfo/UserArticleList.vue"),
+        },
+      ],
+    },
+    {
+      path: "/userinfo/setting",
+      name: "Setting",
+      component: () => import("../views/UserInfo/EditIndex.vue"),
+      children: [
+        {
+          path: "profile",
+          component: () => import("../views/UserInfo/EditProfile.vue"),
+        },
+        {
+          path: "account",
+          component: () => import("../views/UserInfo/EditAccount.vue"),
+        },
+      ],
     },
     {
       path: "/details",

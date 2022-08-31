@@ -14,6 +14,7 @@ type Manager interface {
 	GetUser(userId uint64) (Model.User, error)
 	IsExist(username string) (Model.User, error)
 	GetPostListByUserId(userId uint64) ([]Model.Post, error)
+	UpdateProfileById(userId uint64, data *Model.User) error
 
 	GetCommunityList() ([]Model.Community, error)
 

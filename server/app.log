@@ -264,3 +264,4 @@
 {"level":"ERROR","time":"2022-08-26T14:51:23.370+0800","caller":"Controller/post.go:67","msg":"Dao.Mgr.GetList(latestTime) failed.","error":"Author: unsupported relations for schema Post"}
 {"level":"ERROR","time":"2022-08-26T14:57:31.453+0800","caller":"Controller/post.go:67","msg":"Dao.Mgr.GetList(latestTime) failed.","error":"Author: unsupported relations for schema Post"}
 {"level":"ERROR","time":"2022-08-26T15:02:37.471+0800","caller":"Controller/post.go:67","msg":"Dao.Mgr.GetList(latestTime) failed.","error":"Author: unsupported relations for schema Post"}
+{"level":"INFO","time":"2022-08-31T21:29:49.586+0800","caller":"Logger/logger.go:65","msg":"/v1/user/profile","status":404,"method":"GET","path":"/v1/user/profile","query":"","ip":"::1","user-agent":"PostmanRuntime/7.29.2","errors":"","cost":0}

@@ -8,12 +8,16 @@ import (
 
 type User struct {
 	gorm.Model
-	Id       int64  `json:"id"`
-	UserId   uint64 `json:"user_id"`
-	Username string `json:"username"`
-	Password string `json:"password,omitempty"`
-	Email    string `json:"email"`
-	Gender   int8   `json:"gender"`
+	Id            int64  `json:"id"`
+	UserId        uint64 `json:"user_id"`
+	Username      string `json:"username"`
+	Password      string `json:"password,omitempty"`
+	Email         string `json:"email"`
+	Gender        int8   `json:"gender"`
+	Company       string `gorm:"column:company" json:"company"`               //公司
+	Position      string `gorm:"column:position" json:"position"`             //职位
+	UserPage      string `gorm:"column:user_page" json:"user_page"`           //个人主页
+	UserIntroduce string `gorm:"column:user_introduce" json:"user_introduce"` //个人介绍
 }
 
 type Comment struct {

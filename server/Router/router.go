@@ -41,8 +41,9 @@ func Start(r *gin.Engine) {
 	{
 		v1.GET("/user", Controller.UserInfo)
 		v1.POST("/post", Controller.PostArticle)             // 发布文章
-		v1.GET("/user/bloglist", Controller.UserBlogList)    // 通过userID查询文章详情
+		v1.GET("/user/bloglist", Controller.UserBlogList)    // 通过userID查询文章
 		v1.DELETE("/user/delete/:id", Controller.DeleteBlog) // 通过userID查询文章详情
+		v1.PUT("/user/profile", Controller.UpdateProfile)    // 更新信息
 	}
 
 }

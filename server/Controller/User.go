@@ -116,6 +116,27 @@ func UserInfo(c *gin.Context) {
 	ResponseSuccess(c, user)
 }
 
+func UpdateProfile(c *gin.Context) {
+	var data Model.User
+	_ = c.ShouldBindJSON(&data)
+
+	// 获取当前请求的UserID(从c取到当前发请求的用户ID)
+	userID, err := GetCurrentUserID(c)
+	if err != nil {
+		zap.L().Error("GetCurrentUserID failed", zap.Error(err))
+		ResponseError(c, CodeNotLogin)
+		return
+	}
+
+	err = Dao.Mgr.UpdateProfileById(userID, &data)
+	if err != nil {
+		zap.L().Error("UpdateProfileById failed", zap.Error(err))
+		ResponseError(c, CodeServerBusy)
+		return
+	}
+	ResponseSuccess(c, nil)
+}
+
 func RefreshTokenHandler(c *gin.Context) {
 	rt := c.Query("refresh_token")
 	// 客户端携带Token有三种方式 1.放在请求头 2.放在请求体 3.放在URL

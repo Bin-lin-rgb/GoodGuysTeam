@@ -26,10 +26,9 @@ func (mgr manager) GetList(latestTime int64) ([]Model.Post, error) {
 		return List, result.Error
 	}
 
-	if count == 1 {
+	if count <= 1 {
 		//	是小于等于最早时间只能查到1个文章记录, 证明已经刷完了
-		result := mgr.db.Model(&Model.Post{}).Order("created_at DESC").
-			Preload("Author").Limit(10).Count(&count).Find(&List)
+		result := mgr.db.Model(&Model.Post{}).Order("created_at DESC").Limit(10).Count(&count).Find(&List)
 		return List, result.Error
 	}
 	return List, result.Error
@@ -61,7 +60,7 @@ func (mgr manager) GetCommunityNameById(CommunityId uint64) (CommunityName strin
 
 func (mgr manager) GetPostListByUserId(userId uint64) ([]Model.Post, error) {
 	var postLists []Model.Post
-	if err := mgr.db.Where("author_id = ?", userId).Find(&postLists).Error; err != nil {
+	if err := mgr.db.Where("author_id = ?", userId).Order("created_at DESC").Find(&postLists).Error; err != nil {
 		return postLists, err
 	}
 	return postLists, nil

@@ -44,8 +44,6 @@
 
 <script setup lang="ts">
 import CommHeader from "../../components/common/CommHeader.vue";
-// import
-import { ref } from "vue";
 import {
   User,
   Collection,

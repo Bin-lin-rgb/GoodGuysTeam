@@ -67,8 +67,8 @@
 
 <script setup lang="ts">
 import { ElMessage } from "element-plus";
-import { reactive } from "vue";
-import { updateProfile } from "@/utils/api/login";
+import { reactive, onBeforeMount } from "vue";
+import { updateProfile, getUserInfo } from "@/utils/api/login";
 
 const data = reactive({
   username: "",
@@ -87,6 +87,23 @@ const HanderCommit = async () => {
     });
   }
 };
+
+const loadUserInfo = async () => {
+  const res: any = await getUserInfo();
+  if (res.code === 1000) {
+    data.username = res.data.username;
+    data.position = res.data.position;
+    data.user_introduce = res.data.user_introduce;
+    data.user_page = res.data.user_page;
+    data.company = res.data.company;
+  } else {
+    return;
+  }
+};
+
+onBeforeMount(() => {
+  loadUserInfo();
+});
 </script>
 
 <style scoped lang="less">

@@ -40,9 +40,9 @@
   </div>
 
   <div class="md" @click="activePubilsh = false">
-    <md-editor v-model="text" />
+    <md-editor v-model="text" :showCodeRowNumber="true" />
   </div>
-  
+
   <div class="pop-up" v-show="activePubilsh">
     <h2 id="publish-article">发布文章</h2>
     <h2 id="choose">请选择分类</h2>

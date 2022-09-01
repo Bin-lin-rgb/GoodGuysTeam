@@ -1,7 +1,6 @@
 package Controller
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"net/http"
@@ -163,7 +162,6 @@ func PostDetail(c *gin.Context) {
 func UserBlogList(c *gin.Context) {
 	// 1、获取当前请求的UserID(从c取到当前发请求的用户ID)
 	userId, err := GetCurrentUserID(c)
-	fmt.Println(userId)
 	if err != nil {
 		zap.L().Error("GetCurrentUserID failed", zap.Error(err))
 		ResponseError(c, CodeInvalidParams)
@@ -177,14 +175,35 @@ func UserBlogList(c *gin.Context) {
 	}
 
 	data := make([]*Model.ApiPostList, 0, len(postList))
+	timeLayoutDate := "01-02"
 	timeLayoutymdm := "2006-01-02 15:04"
 
 	for _, post := range postList {
+		// 根据作者id查询作者信息
+		authorName, err := Dao.Mgr.GetUsernameById(post.AuthorId)
+		if err != nil {
+			zap.L().Error("Dao.Mgr.GetAuthorById() failed",
+				zap.Uint64("postID", post.AuthorId),
+				zap.Error(err))
+			continue
+		}
+		// 根据社区id查询社区详细信息
+		communityName, err := Dao.Mgr.GetCommunityNameById(post.CommunityId)
+		if err != nil {
+			zap.L().Error("Dao.Mgr.GetCommunityNameById() failed",
+				zap.Uint64("community_id", post.CommunityId),
+				zap.Error(err))
+			continue
+		}
+		// 接口数据拼接
 		postData := &Model.ApiPostList{
-			PostId:     post.Id,
-			Title:      post.Title,
-			Content:    post.Content,
-			CreatedAt2: post.CreatedAt.Format(timeLayoutymdm),
+			PostId:        post.Id,
+			Title:         post.Title,
+			Content:       post.Content,
+			CommunityName: communityName,
+			AuthorName:    authorName,
+			CreatedAt:     post.CreatedAt.Format(timeLayoutDate),
+			CreatedAt2:    post.CreatedAt.Format(timeLayoutymdm),
 		}
 		data = append(data, postData)
 	}

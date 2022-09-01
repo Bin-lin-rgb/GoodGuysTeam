@@ -15,6 +15,8 @@ declare module '@vue/runtime-core' {
     AEmpty: typeof import('@arco-design/web-vue')['Empty']
     ArticleItem: typeof import('./src/components/common/ArticleItem.vue')['default']
     ASpace: typeof import('@arco-design/web-vue')['Space']
+    ATabPane: typeof import('@arco-design/web-vue')['TabPane']
+    ATabs: typeof import('@arco-design/web-vue')['Tabs']
     ATag: typeof import('@arco-design/web-vue')['Tag']
     CommHeader: typeof import('./src/components/common/CommHeader.vue')['default']
     ElAffix: typeof import('element-plus/es')['ElAffix']

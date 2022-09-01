@@ -103,7 +103,7 @@ func UserInfo(c *gin.Context) {
 	// 获取当前请求的UserID(从c取到当前发请求的用户ID)
 	userID, err := GetCurrentUserID(c)
 	if err != nil {
-		zap.L().Error("GetCurrentUserID() failed", zap.Error(err))
+		zap.L().Error("GetCurrentUserID failed", zap.Error(err))
 		ResponseError(c, CodeNotLogin)
 		return
 	}
@@ -113,7 +113,13 @@ func UserInfo(c *gin.Context) {
 		ResponseError(c, CodeUserNotExist)
 	}
 
-	ResponseSuccess(c, user)
+	timeLayoutymdm := "2006-01-02 15:04"
+
+	c.JSON(http.StatusOK, gin.H{
+		"code":       CodeSuccess,
+		"data":       user,
+		"created_at": user.CreatedAt.Format(timeLayoutymdm),
+	})
 }
 
 func UpdateProfile(c *gin.Context) {

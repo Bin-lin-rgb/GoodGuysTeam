@@ -21,6 +21,7 @@
               v-model="text"
               :previewOnly="true"
               :marked-heading-id="generateId"
+              :showCodeRowNumber="true"
               @onGetCatalog="GetCatalog"
             />
             <a-space

@@ -6,17 +6,30 @@
       <el-main class="main">
         <ul
           infinite-scroll-immediate="false"
-          infinite-scroll-distance="400"
+          infinite-scroll-distance="1"
           v-infinite-scroll="load"
           class="list-wrap"
           style="overflow: auto"
         >
-          <!-- class="item" -->
-          <ListItem
+          <li
+            class="item"
             v-for="item in articleList"
             :key="item.post_id"
-            :articleListItem="item"
-          />
+            @click="gotoDetails(item.post_id)"
+          >
+            <div class="info-bar">
+              {{ item.author_name }}
+              <div class="divider"></div>
+              {{ item.created_at }}
+              <div class="divider"></div>
+              {{ item.community_name }}
+            </div>
+
+            <div class="info-main">
+              <div class="main-title">{{ item.title }}</div>
+              <div class="main-context">{{ item.content }}</div>
+            </div>
+          </li>
         </ul>
       </el-main>
       <el-aside width="300px" class="aside">
@@ -33,7 +46,6 @@ import { GetPostListWithTime } from "@/utils/api/article";
 import { ref, onBeforeMount } from "vue";
 import { ElMessage } from "element-plus";
 import { useRouter } from "vue-router";
-import ListItem from "./ListItem.vue";
 const router = useRouter();
 
 function gotoDetails(id: any) {
@@ -55,7 +67,7 @@ const load = () => {
     }
     // message: `获取列表成功！`
     articleList.value = [...articleList.value, ...res.data];
-    nextTime.value = res.data.next_time;
+    nextTime.value = res.next_time;
   });
 };
 

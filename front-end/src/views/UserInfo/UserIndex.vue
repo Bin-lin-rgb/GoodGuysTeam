@@ -1,14 +1,14 @@
 <template>
   <CommHeader />
   <div class="common-layout">
-    <el-menu>
-      <div class="major-area">
-        <div class="user-info-block">
-          <div class="demo-basic--circle">
-            <el-avatar :size="90" :src="circleUrl" />
+    <el-container class="container">
+      <el-main class="main">
+        <div class="major-area">
+          <div class="user-info-block">
+            <el-avatar :size="90" :src="circleUrl" class="avatar" />
             <el-row class="info-box" type="flex">
               <el-col>
-                <div>{{ userinfo.username }}</div>
+                <div class="info-username">{{ userinfo.username }}</div>
               </el-col>
             </el-row>
             <div class="action-box">
@@ -23,21 +23,21 @@
               </el-row>
             </div>
           </div>
-        </div>
-        <el-divider />
-        <div class="badge-wall">
-          <div class="badge-left">
-            <div>
-              <el-row class="badge-left">
-                <div class="badge-img"></div>
-                <div>获得勋章</div>
-              </el-row>
+          <el-divider />
+          <div class="badge-wall">
+            <div class="badge-left">
+              <div>
+                <el-row class="badge-left">
+                  <div class="badge-img"></div>
+                  <div>获得勋章</div>
+                </el-row>
+              </div>
             </div>
-          </div>
-          <div class="badge-list">
-            <el-icon :size="20">
-              <ArrowRight />
-            </el-icon>
+            <div class="badge-list">
+              <el-icon :size="20">
+                <ArrowRight />
+              </el-icon>
+            </div>
           </div>
         </div>
         <div class="list-block">
@@ -58,8 +58,11 @@
             <!-- <vue-router></vue-router> -->
           </div>
         </div>
-      </div>
-    </el-menu>
+      </el-main>
+      <el-aside width="250px" class="aside">
+        <div class="aside-wrap"></div>
+      </el-aside>
+    </el-container>
   </div>
 </template>
 
@@ -102,79 +105,81 @@ onBeforeMount(() => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .common-layout {
-  width: 960px;
-  height: 442.66px;
-  position: fixed;
-  top: 90px;
-  padding: 20px;
-  left: 7%;
-  align-items: center;
-  justify-content: center;
-  border-radius: 20px;
-}
+  margin-top: 80px !important;
 
-.major-area {
-  width: 708px;
-  height: 442.66px;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  left: 5%;
-}
+  .container {
+    width: 1100px;
+    .main {
+      height: 800px;
+      .major-area {
+        width: 100%;
+        background: rgb(255, 255, 255);
+        .user-info-block {
+          width: 100%;
+          padding: 25px 25px 25px 35px;
+          display: flex;
+          .avatar {
+            text-align: center;
+            line-height: 100%;
+            // margin: 0 auto;
+          }
+          .info-box {
+            width: 307.21px;
+            position: relative;
+            left: 5%;
+            justify-content: flex-start;
+          }
 
-.user-info-block {
-  width: 708px;
-  height: 152.99px;
-  top: 10%;
-  position: relative;
-}
+          .action-box {
+            width: 118px;
+            position: relative;
+            left: 25%;
+            display: flex;
+            align-items: flex-end;
+          }
+        }
+        .badge-wall {
+          width: 708px;
+          position: relative;
 
-.info-box {
-  width: 307.21px;
-  height: 92.99px;
-  position: relative;
-  left: 5%;
-  justify-content: flex-start;
-}
+          .badge-left {
+            width: 106.13px;
+            height: 28px;
+            position: relative;
+            margin-left: 20px;
+            .badge-img {
+              background-image: url("https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/badge-count-icon.0586ac4.png");
+              background-size: contain;
+              width: 20px;
+              height: 20px;
+              margin: 0 5px;
+            }
+          }
 
-.action-box {
-  width: 118px;
-  height: 92.99px;
-  position: relative;
-  left: 25%;
-  justify-content: flex-start;
-}
-
-.badge-wall {
-  width: 708px;
-  height: 52px;
-  position: relative;
-}
-
-.badge-left {
-  width: 106.13px;
-  height: 28px;
-  position: relative;
-}
-
-.badge-img {
-  background-image: url("https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/badge-count-icon.0586ac4.png");
-  background-size: contain;
-  width: 20px;
-  height: 20px;
-}
-
-.badge-list {
-  width: 21px;
-  height: 28px;
-  position: absolute;
-  top: 0px;
-  right: 5%;
-  justify-content: flex-end;
-}
-.demo-basic--circle {
-  display: flex;
+          .badge-list {
+            width: 21px;
+            height: 28px;
+            position: absolute;
+            top: 0px;
+            right: 5%;
+            justify-content: flex-end;
+          }
+        }
+        .list-block {
+          margin-top: 10px;
+        }
+      }
+    }
+    .aside {
+      padding: 20px 20px 20px 0;
+      .aside-wrap {
+        width: 100%;
+        height: 100%;
+        background: rgb(255, 255, 255);
+      }
+    }
+  }
 }
 </style>

@@ -11,25 +11,12 @@
           class="list-wrap"
           style="overflow: auto"
         >
-          <li
-            class="item"
+          <!-- class="item" -->
+          <ListItem
             v-for="item in articleList"
             :key="item.post_id"
-            @click="gotoDetails(item.post_id)"
-          >
-            <div class="info-bar">
-              {{ item.author_name }}
-              <div class="divider"></div>
-              {{ item.created_at }}
-              <div class="divider"></div>
-              {{ item.community_name }}
-            </div>
-
-            <div class="info-main">
-              <div class="main-title">{{ item.title }}</div>
-              <div class="main-context">{{ item.content }}</div>
-            </div>
-          </li>
+            :articleListItem="item"
+          />
         </ul>
       </el-main>
       <el-aside width="300px" class="aside">
@@ -42,10 +29,11 @@
 <script lang="ts" setup>
 import CommHeader from "@/components/common/CommHeader.vue";
 import SubHeader from "@/components/common/SubHeader.vue";
-import { GetPostList, GetPostListWithTime } from "@/utils/api/article";
+import { GetPostListWithTime } from "@/utils/api/article";
 import { ref, onBeforeMount } from "vue";
 import { ElMessage } from "element-plus";
 import { useRouter } from "vue-router";
+import ListItem from "./ListItem.vue";
 const router = useRouter();
 
 function gotoDetails(id: any) {

@@ -1,5 +1,17 @@
 
 
+
+
+# 00 项目分工
+
+| **团队成员** | **主要贡献**                                                 |
+| ------------ | ------------------------------------------------------------ |
+| 林斌         | 首页、文章详情页、创作者中心布局和文章管理部分、编辑个人信息、后端 |
+| 杜万凯       | 创作者中心的首页部分                                         |
+| 戴柏霖       | 个人信息页面                                                 |
+
+由于杜万凯和戴柏霖他们比较忙，所以不太有时间，我（林斌）也是边学边做，导致项目完成度不高，我也是只能大致完成一些基本功能和后端的代码。
+
 # 01 项目实现
 
 ### 1.1 技术选型与相关开发文档
@@ -38,6 +50,7 @@
     ├─stores    // pinia 状态管理
     │      index.ts
     │      user.ts
+    │      article.ts
     │      
     ├─utils
     │  │  aes.ts
@@ -63,7 +76,11 @@
         │      HomeIndex.vue
         │      
         └─UserInfo     // 用户相关
-                edit.vue
+                EditAccount.vue
+                EditIndex.vue
+                EditProfile.vue
+                ListItem.vue
+                UserArticleList.vue
                 UserIndex.vue
                 UserLogin.vue
 ```
@@ -94,11 +111,13 @@
 
 | 功能（接口）                                                 | 图片                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 首页 GET/postlist/:time 根据时间倒序展示的文章列表           | ![img](https://ksr7oe3m3x.feishu.cn/space/api/box/stream/download/asynccode/?code=NTJiMWYyMzc1OTkyYjE3ZDQ1MmFmYTNkOTVlODE1NWZfMXNlRDV4UDVtTU83N0xHNHhJRFByOGkydDdRTndXSWVfVG9rZW46Ym94Y25peGtzUkNiOFM5QTRocm9BS0pCZ2toXzE2NjE1MDgwMTE6MTY2MTUxMTYxMV9WNA) |
-| 注册和登录 POST/user/login       Login POST/user/register        Register | ![img](https://ksr7oe3m3x.feishu.cn/space/api/box/stream/download/asynccode/?code=MjczY2YzYTFiNmFiMGMwMzIxYjBmN2Y2ZjdlMTFkY2FfaWozSkNLNll5WEtYTWlFdk1DMXdmOFhiOG5NMEcwUWRfVG9rZW46Ym94Y255ejV5SW9UTVg0eXFBdU5yOURRbENlXzE2NjE1MDgwMTE6MTY2MTUxMTYxMV9WNA) |
-| 创作者中心 [文章管理]  GET/user/bloglist  通过userID查询文章详情（这个userID不需要前端直接传，前端只要携带token访问即可，后端会根据token解析userID用于查询该用户的文章列表） | ![img](https://ksr7oe3m3x.feishu.cn/space/api/box/stream/download/asynccode/?code=MjQzNDNkYTk2ZmExNzU0YTZiMzk3NTNkMjJjZWUwYjFfeW9pMTdRTUZsMmczOVRvczhBTlFVZ1Fqd0doYWs3N2FfVG9rZW46Ym94Y25UbmFiWFJyMk5kcU51Qnhya0MzQmhiXzE2NjE1MDgwMTE6MTY2MTUxMTYxMV9WNA) |
-| 写文章和发布文章 POST/post 编写文章之后可以选择相应内容的标签进行发布 | ![img](https://ksr7oe3m3x.feishu.cn/space/api/box/stream/download/asynccode/?code=ZGI5MGZiYmI0NzY1OTkzNzAzZWUzYjcyNmFkNmU1ZjJfZWQ0TExGdjhoNm1rTlQ0N0lrWG50WGk4bkpvT2I1MWJfVG9rZW46Ym94Y25kMURRc0xhMm5ZeG9TTTdSV3ExbXRmXzE2NjE1MDgwMTE6MTY2MTUxMTYxMV9WNA) |
-| 删除发布的文章DELETE user/delete/:id 根据 文章的 id 进行删除，需要优先通过token鉴权 | ![img](https://ksr7oe3m3x.feishu.cn/space/api/box/stream/download/asynccode/?code=NzMxYTU3ZDBkNWMzYzkwZDBlMjk5ZTEyZjBjZTEzMWJfU0pUdWppNkdtZ0o3RlhKbzZ0bExaTjc5bENRZk1ObUpfVG9rZW46Ym94Y25mZ3lUZEQ1R0NoZ054VkJ6bTE1ZjZkXzE2NjE1MDgwMTE6MTY2MTUxMTYxMV9WNA) |
+| 首页 GET/postlist/:time 根据时间倒序展示的文章列表           | ![](https://cdn.jsdelivr.net/gh/Bin-lin-rgb/blog-img@main/1首页.png) |
+| 注册和登录 POST/user/login       Login POST/user/register        Register | ![](https://cdn.jsdelivr.net/gh/Bin-lin-rgb/blog-img@main/2登录.png) |
+| 创作者中心 [文章管理]  GET/user/bloglist  通过userID查询文章详情（这个userID不需要前端直接传，前端只要携带token访问即可，后端会根据token解析userID用于查询该用户的文章列表） | ![](https://cdn.jsdelivr.net/gh/Bin-lin-rgb/blog-img@main/3创作者中心.png) |
+| 写文章和发布文章 POST/post 编写文章之后可以选择相应内容的标签进行发布 | ![](https://cdn.jsdelivr.net/gh/Bin-lin-rgb/blog-img@main/4发布文章.png) |
+| 删除发布的文章DELETE user/delete/:id 根据 文章的 id 进行删除，需要优先通过token鉴权 | ![](https://cdn.jsdelivr.net/gh/Bin-lin-rgb/blog-img@main/5删除文章.png) |
+| 个人主页展示                                                 | ![](https://cdn.jsdelivr.net/gh/Bin-lin-rgb/blog-img@main/6个人主页.png) |
+| 修改个人资料                                                 | ![](https://cdn.jsdelivr.net/gh/Bin-lin-rgb/blog-img@main/7修改个人资料.png) |
 
 # 03 Demo 演示视频
 
@@ -124,6 +143,20 @@
 
 - 文章详情的目录暂时没有做分级处理
 
+- 用户之间的交互还未完成（点赞、评论等）
+
+
+
 ### 反思
 
-​      在项目过程当中，发现分工、api设计很重要，同时发现自学能力和经验的积累十分重要，平时一定要养成写笔记的习惯
+​      在项目过程当中，发现分工、api设计很重要，同时发现自学能力和经验的积累十分重要，而且平时一定要养成写笔记的习惯。
+
+
+
+### 一些个人总结
+
+​       首先十分感谢这次字节跳动举办的青训营，课程内容很丰富，引导我们学习的方向。这次活动也督促我不荒废暑假时光，在这之前我连一个页面也写不出来，通过这次青训营的学习，起码掌握了一些技能。
+
+​       在项目过程中，由于队友在暑假的时间不是很充裕，项目的大部分功能都是我写的，但我基本上是处于一种边学边做的状态，在这过程中四处碰壁，很难受，不过解决一个问题之后也获得很舒心的心情。
+
+​       在这个项目的过程当中，我也更加深刻意识到实践的重要性，之前学的东西只要不去实践，10天可能就忘光了，那约等于没学。所以我觉得边学边实践才是符合前端的学习方式吧。

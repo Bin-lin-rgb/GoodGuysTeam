@@ -11,7 +11,7 @@ func (mgr manager) Register(userinfo Model.User) error {
 
 func (mgr manager) GetUser(userId uint64) (Model.User, error) {
 	var user Model.User
-	if err := mgr.db.Select("user_id", "username", "company", "user_page", "user_introduce", "position", "created_at").
+	if err := mgr.db.Select("username", "company", "user_page", "user_introduce", "position", "created_at").
 		Where("user_id=?", userId).Find(&user).Error; err != nil {
 		return user, err
 	}

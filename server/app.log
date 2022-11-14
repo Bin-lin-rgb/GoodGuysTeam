@@ -281,3 +281,4 @@
 {"level":"ERROR","time":"2022-09-01T11:40:22.485+0800","caller":"Controller/post.go:62","msg":"latestTime, err := strconv.ParseInt failed.","error":"strconv.ParseInt: parsing \"undefined\": invalid syntax"}
 {"level":"ERROR","time":"2022-09-01T11:40:23.164+0800","caller":"Controller/post.go:62","msg":"latestTime, err := strconv.ParseInt failed.","error":"strconv.ParseInt: parsing \"undefined\": invalid syntax"}
 {"level":"DEBUG","time":"2022-09-01T14:52:23.859+0800","caller":"Controller/User.go:32","msg":"----register----","username":"456","password":"FCA67135C3B4D1AF926EF69EBF0E1101","id":141227825729372161}
+{"level":"DEBUG","time":"2022-11-14T08:46:04.957+0800","caller":"Controller/User.go:32","msg":"----register----","username":"1123","password":"45EB9B3941110CB05C060DAD3FB8E23D","id":151917632075857921}

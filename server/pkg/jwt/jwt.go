@@ -2,6 +2,7 @@ package jwt
 
 import (
 	"errors"
+	"server/Utils"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -15,7 +16,7 @@ type MyClaims struct {
 }
 
 // MySecret 定义Secret
-var MySecret = []byte("GoodGuysTeam")
+var MySecret = []byte(Utils.JwtKey)
 
 func keyFunc(_ *jwt.Token) (i interface{}, err error) {
 	return MySecret, nil

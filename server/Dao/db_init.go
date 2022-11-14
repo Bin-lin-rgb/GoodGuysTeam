@@ -1,8 +1,10 @@
 package Dao
 
 import (
+	"fmt"
 	"log"
 	"server/Model"
+	"server/Utils"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -35,7 +37,9 @@ type manager struct {
 var Mgr Manager
 
 func init() {
-	dsn := "root:Admin666@tcp(127.0.0.1:3306)/blogserver?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", Utils.DbUser,
+		Utils.DbPassWord, Utils.DbHost, Utils.DbPort, Utils.DbName)
+
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
 			SingularTable: true,

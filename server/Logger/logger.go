@@ -10,15 +10,22 @@ import (
 	"net/http/httputil"
 	"os"
 	"runtime/debug"
-	"server/Config"
 	"strings"
 	"time"
 )
 
 var lg *zap.Logger
 
+type LogConfig struct {
+	Level      string `json:"level"`
+	Filename   string `json:"filename"`
+	MaxSize    int    `json:"maxsize"`
+	MaxAge     int    `json:"max_age"`
+	MaxBackups int    `json:"max_backups"`
+}
+
 // InitLogger 初始化Logger
-func InitLogger(cfg *Config.LogConfig) (err error) {
+func InitLogger(cfg *LogConfig) (err error) {
 	writeSyncer := getLogWriter(cfg.Filename, cfg.MaxSize, cfg.MaxBackups, cfg.MaxAge)
 	encoder := getEncoder()
 	var l = new(zapcore.Level)

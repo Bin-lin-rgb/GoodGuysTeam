@@ -27,20 +27,6 @@ export default defineConfig({
         }),
       ],
     }),
-    // createStyleImportPlugin({
-    //   libs: [
-    //     {
-    //       libraryName: "@arco-design/web-vue",
-    //       esModule: true,
-    //       resolveStyle: (name) => {
-    //         // css
-    //         return `@arco-design/web-vue/es/${name}/style/css.js`;
-    //         // less
-    //         // return `@arco-design/web-vue/es/${name}/style/index.js`;
-    //       },
-    //     },
-    //   ],
-    // }),
     ElementPlus({
       // options
     }),
@@ -50,13 +36,13 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
-  // server: {
-  //   proxy: {
-  //     "/api": {
-  //       target: "http://jsonplaceholder.typicode.com",
-  //       changeOrigin: true,
-  //       rewrite: (path) => path.replace(/^\/api/, ""),
-  //     },
-  //   },
-  // },
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://127.0.0.1:9000",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
 });

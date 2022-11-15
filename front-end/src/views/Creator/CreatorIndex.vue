@@ -93,7 +93,10 @@ const userStore = useUserStore();
 
 const router = useRouter();
 function GotoWrite() {
-  router.push("/write");
+  const routeData = router.resolve({
+    path: "/write",
+  });
+  window.open(routeData.href, "_blank");
 }
 function GotoArticleList() {
   router.push("/creator/list");

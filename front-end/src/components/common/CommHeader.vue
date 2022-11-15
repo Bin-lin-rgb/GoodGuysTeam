@@ -47,7 +47,7 @@
               <el-dropdown-item @click="gotoUserinfo"
                 >我的主页</el-dropdown-item
               >
-              <el-dropdown-item>设置</el-dropdown-item>
+              <el-dropdown-item @click="GotoEdit">设置</el-dropdown-item>
               <el-dropdown-item @click="Logout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </template>
@@ -124,6 +124,9 @@ function gotoWrite() {
     path: "/write",
   });
   window.open(routeData.href, "_blank");
+}
+function GotoEdit() {
+  router.push("/userinfo/setting/profile");
 }
 </script>
 

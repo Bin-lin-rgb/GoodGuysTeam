@@ -5,27 +5,33 @@
         <!-- 登录框左侧 -->
         <div class="login-left">
           <a href="/" title="---" class="logo">
-            <img src="../assets/img/logo02.png" alt="a logo" title="a logo" />
+            <img
+              src="@/assets/img/favicon-32x32.png"
+              alt="a logo"
+              title="a logo"
+            />
           </a>
           <div class="left-qrcode">
             <div id="qrcode" title="a logo">
               <canvas width="180" height="180" style="display: none"></canvas
-              ><img src="" style="display: block" />
+              ><img src="@/assets/img/erweima.png" style="display: block" />
             </div>
             <div class="qrcode-text">扫码登录</div>
           </div>
           <div class="quick-login">快捷登录</div>
           <div class="qq-wx-wb">
             <div class="wx-login">
-              <a href="/oauth/login/WECHAT_OPEN" title="微信登录"
-                ><i class="fa fa-weixin"></i
+              <a href="/NoFunction" title="微信登录">
+                <a-space size="large"> <icon-wechat /> </a-space
               ></a>
             </div>
             <div class="qq-login">
-              <a href="/oauth/login/qq" title="QQ登录"></a>
+              <a href="/NoFunction" title="QQ登录"> <icon-qq /></a>
             </div>
             <div class="weibo-login">
-              <a href="/oauth/login/weibo" title="微博登录"></a>
+              <a href="/NoFunction" title="微博登录"
+                ><icon-weibo-circle-fill
+              /></a>
             </div>
           </div>
         </div>
@@ -40,7 +46,9 @@
                 :class="current == item.id ? 'actives' : ''"
                 @click="loginChange(item.id)"
               >
-                <a :class="current == item.id ? 'activess' : ''">{{ item.text }}</a>
+                <a :class="current == item.id ? 'activess' : ''">{{
+                  item.text
+                }}</a>
               </li>
             </ul>
             <div class="tab-content">
@@ -90,12 +98,16 @@
 
                     <el-form-item class="login-Verification" prop="captcha">
                       <el-input placeholder="请输入您的手机号" />
-                      <el-button class="btn btn-primary sendcaptcha" type="primary"
+                      <el-button
+                        class="btn btn-primary sendcaptcha"
+                        type="primary"
                         >发送验证码</el-button
                       >
                     </el-form-item>
                     <div class="login-submit">
-                      <el-button class="btn btn-primary sendcaptcha" type="primary"
+                      <el-button
+                        class="btn btn-primary sendcaptcha"
+                        type="primary"
                         >登录</el-button
                       >
                     </div>
@@ -124,6 +136,8 @@ import { useRouter } from "vue-router";
 //element
 import { Avatar, Lock } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
+//acro-ui
+// import { icon-qq, icon-weibo-circle-fill } from "@arco-design/web-vue/es/icon";
 // 加密
 import { Encrypt } from "@/utils/aes";
 // store
@@ -224,6 +238,11 @@ const userBtnL = (formEl: any) => {
     }
   });
 };
+
+function GoToErr() {
+  router.push("/NoFunction");
+}
+
 onBeforeUnmount(() => {
   clearTimeout(timer);
 });
@@ -410,7 +429,7 @@ section {
   padding: 20px;
 }
 .login-left .logo img {
-  width: 120px;
+  width: 32px;
 }
 .left-qrcode {
   width: 200px;

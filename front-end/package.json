@@ -2,7 +2,7 @@
   "name": "front-end",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --port 9090",
+    "dev": "vite --port 8000",
     "build": "run-p type-check build-only",
     "preview": "vite preview --port 4173",
     "build-only": "vite build",

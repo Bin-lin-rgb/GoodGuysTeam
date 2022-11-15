@@ -2,11 +2,11 @@
   <div class="content">
     <el-result
       icon="success"
-      title="Success Tip"
-      sub-title="Please follow the instructions"
+      title="发布成功"
+      sub-title="继续学习，请保持每天一定的知识输出哦！"
     >
       <template #extra>
-        <el-button type="primary" @click="gotoCreator">Back</el-button>
+        <el-button type="primary" @click="gotoCreator">返回</el-button>
       </template>
     </el-result>
   </div>

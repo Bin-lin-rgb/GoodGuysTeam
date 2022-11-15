@@ -129,6 +129,14 @@ function showClick() {
 }
 
 function onSubmit() {
+  if (title.value === "" || text.value === "") {
+    ElMessage({
+      message: "文章标题或者内容不能为空！",
+      type: "error",
+    });
+    return;
+  }
+
   PostArticle({
     title: title.value,
     content: text.value,
